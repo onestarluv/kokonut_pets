@@ -168,13 +168,15 @@ public class PetInventory {
      */
     public void close(Player p) {
         p.setMetadata("MCPets;petInventory", new FixedMetadataValue(MCPets.getInstance(), null));
+        // 에고버스: DB 는 이 플레이어 한 줄만 저장 (원본은 테이블 전체를 지우고 다시 썼다)
+        if (GlobalConfig.getInstance().isDatabaseSupport()) {
+            PlayerData.get(p.getUniqueId()).save();
+            return;
+        }
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!GlobalConfig.getInstance().isDatabaseSupport())
-                    PlayerDataNoDatabase.get(p.getUniqueId()).save();
-                else
-                    PlayerData.saveDB();
+                PlayerDataNoDatabase.get(p.getUniqueId()).save();
             }
         }.runTaskAsynchronously(MCPets.getInstance());
     }

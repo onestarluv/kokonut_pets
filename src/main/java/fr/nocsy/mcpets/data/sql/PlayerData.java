@@ -117,8 +117,9 @@ public class PlayerData {
     }
 
     public void save() {
+        // 에고버스: 내용은 지금 만들고 DB 쓰기는 DB 스레드에서 (메인 스레드가 DB 를 기다리지 않게)
         if (GlobalConfig.getInstance().isDatabaseSupport())
-            Databases.savePlayerData(uuid);
+            Databases.savePlayerDataAsync(uuid);
         else {
             PlayerDataNoDatabase pdn = PlayerDataNoDatabase.get(uuid);
             pdn.setMapOfRegisteredNames(mapOfRegisteredNames);

@@ -13,7 +13,8 @@ public class BetterModelNameTag implements AbstractNameTag {
 
     @Override
     public void setString(String string) {
-        delegate.component(LegacyComponentSerializer.legacySection().deserialize(string));
+        // null/빈 문자열이면 이름표를 비운다 (Kokonut_Model 은 빈 이름표를 보내지 않는다).
+        delegate.component(string == null || string.isBlank() ? null : LegacyComponentSerializer.legacySection().deserialize(string));
     }
 
     @Override

@@ -190,9 +190,9 @@ public class PetListener implements Listener {
         UUID uuid = p.getUniqueId();
 
         Bukkit.getScheduler().runTaskLater(MCPets.getInstance(), () -> {
-            if (GlobalConfig.getInstance().isDatabaseSupport()) {
-                PlayerData.reloadAll(uuid);
-            }
+          // 에고버스: 접속 시 비동기 불러오기(DatabaseRefreshListener)가 끝난 뒤에 펫을 다시 소환한다.
+          Runnable restore = () -> {
+            if (!p.isOnline()) return;
 
             if (GlobalConfig.getInstance().isVelocityEnabled()
                     && GlobalConfig.getInstance().isDatabaseSupport()) {
@@ -258,6 +258,11 @@ public class PetListener implements Listener {
                     }
                 }
             }
+          };
+          Databases.whenLoaded(uuid).thenRun(() -> {
+              if (Bukkit.isPrimaryThread()) restore.run();
+              else if (MCPets.getInstance().isEnabled()) Bukkit.getScheduler().runTask(MCPets.getInstance(), restore);
+          });
         }, 20L);
     }
 

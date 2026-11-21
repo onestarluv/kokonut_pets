@@ -362,7 +362,8 @@ public class PetStats {
      */
     public void save() {
         if (GlobalConfig.getInstance().isDatabaseSupport()) {
-            PlayerData.saveDB();
+            // 에고버스: 주인 한 명만 (원본은 모든 플레이어를 다시 썼다)
+            if (pet.getOwner() != null) Databases.savePlayerDataAsync(pet.getOwner());
             return;
         }
 
@@ -441,9 +442,10 @@ public class PetStats {
         // Runs Async if it's a SQL, sync if not coz YAML doesn't support Async
         if (GlobalConfig.getInstance().isDatabaseSupport()) {
             // TODO: For now, we make the AutoSave only saving the connected players for MySQL users
-            Bukkit.getScheduler().runTaskTimerAsynchronously(MCPets.getInstance(), () -> {
+            // 에고버스: 내용은 메인 스레드에서 만들고 쓰기는 DB 스레드에서 (비동기 스레드에서 공유 데이터를 읽지 않게)
+            Bukkit.getScheduler().runTaskTimer(MCPets.getInstance(), () -> {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    Databases.savePlayerData(p.getUniqueId());
+                    Databases.savePlayerDataAsync(p.getUniqueId());
                 }
             }, delay, delay);
             return;

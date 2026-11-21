@@ -173,6 +173,62 @@ public class Databases {
 
         // Update the SQL query to fetch data for the specific player with the provided UUID
         ResultSet playerData = getMySQL().preparedQuery("SELECT * FROM " + table + " WHERE uuid=?", playerUUID.toString());
+        return applyPlayerRows(playerUUID, playerData);
+    }
+
+    // ---- 에고버스: DB 작업 전용 스레드 (순서 보장), 접속 시 비동기 불러오기 ----
+
+    /** 모든 DB 쓰기·읽기를 순서대로 처리하는 단일 스레드. 메인 스레드는 DB 를 기다리지 않는다. */
+    private static final java.util.concurrent.ExecutorService EXECUTOR = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread thread = new Thread(r, "Kokonut_Pets-DB");
+        thread.setDaemon(true);
+        return thread;
+    });
+
+    /** 접속 시 불러오기 진행 상태: 끝나면 메인 스레드에서 완료된다. */
+    private static final Map<UUID, java.util.concurrent.CompletableFuture<Void>> LOADS = new ConcurrentHashMap<>();
+
+    /** 플레이어 데이터를 비동기로 읽고, 메인 스레드에서 적용한다. 완료 future 를 돌려준다. */
+    public static java.util.concurrent.CompletableFuture<Void> loadDataAsync(UUID playerUUID) {
+        java.util.concurrent.CompletableFuture<Void> done = new java.util.concurrent.CompletableFuture<>();
+        LOADS.put(playerUUID, done);
+        if (!GlobalConfig.getInstance().isDatabaseSupport() || getMySQL() == null) {
+            done.complete(null);
+            return done;
+        }
+        EXECUTOR.execute(() -> {
+            ResultSet rows = getMySQL().preparedQuery("SELECT * FROM " + table + " WHERE uuid=?", playerUUID.toString());
+            if (!MCPets.getInstance().isEnabled()) {
+                done.complete(null);
+                return;
+            }
+            org.bukkit.Bukkit.getScheduler().runTask(MCPets.getInstance(), () -> {
+                try {
+                    applyPlayerRows(playerUUID, rows);
+                } finally {
+                    done.complete(null);
+                }
+            });
+        });
+        return done;
+    }
+
+    /** 접속 시 불러오기가 끝나면 완료되는 future (진행 중인 것이 없으면 이미 완료). */
+    public static java.util.concurrent.CompletableFuture<Void> whenLoaded(UUID playerUUID) {
+        return LOADS.getOrDefault(playerUUID, java.util.concurrent.CompletableFuture.completedFuture(null));
+    }
+
+    private static boolean loading(UUID playerUUID) {
+        java.util.concurrent.CompletableFuture<Void> load = LOADS.get(playerUUID);
+        return load != null && !load.isDone();
+    }
+
+    public static void forgetLoad(UUID playerUUID) {
+        LOADS.remove(playerUUID);
+    }
+
+    /** 조회 결과(플레이어 한 명)를 메모리에 적용한다. 메인 스레드에서 호출. */
+    private static boolean applyPlayerRows(UUID playerUUID, ResultSet playerData) {
 
         if (playerData == null)
             return true;
@@ -224,64 +280,82 @@ public class Databases {
         return true;
     }
 
-    public static void saveData() {
-        if (!GlobalConfig.getInstance().isDatabaseSupport())
-            return;
+    /** 저장할 내용 (호출한 스레드에서 미리 만든다). */
+    private record Snapshot(UUID uuid, String names, String inventories, String data, String lastActivePet) { }
 
-        getMySQL().query("TRUNCATE " + table);
+    private static Snapshot snapshot(UUID playerUUID) {
+        PlayerData pd = PlayerData.getRegisteredData().get(playerUUID);
+        if (pd == null) return null;
+        String names = buildStringSerialized(pd.getMapOfRegisteredNames());
+        String inventories = buildStringSerialized(pd.getMapOfRegisteredInventories());
+        String lastActivePet = pd.getLastActivePet();
+        if (lastActivePet == null) lastActivePet = "";
+        StringBuilder data = new StringBuilder();
+        for (PetStats stats : PetStats.getPetStats(playerUUID)) {
+            data.append(stats.serialize()).append(";;;");
+        }
+        if (data.length() > 0)
+            data = new StringBuilder(data.substring(0, data.length() - 3));
+        return new Snapshot(playerUUID, names, inventories, data.toString(), lastActivePet);
+    }
 
-        for (UUID uuid : PlayerData.getRegisteredData().keySet()) {
-            synchronized (getLockForPlayer(uuid)) {
-                PlayerData pd = PlayerData.getRegisteredData().get(uuid);
+    /** DB 스레드에서 실행: 그 플레이어 한 줄만 바꾼다. */
+    private static void write(Snapshot s) {
+        getMySQL().preparedQuery("DELETE FROM " + table + " WHERE uuid=?", s.uuid().toString());
+        getMySQL().preparedQuery("INSERT INTO " + table + " (uuid, names, inventories, data, lastActivePet) VALUES (?, ?, ?, ?, ?)",
+                s.uuid().toString(), s.names(), s.inventories(), s.data(), s.lastActivePet());
+    }
 
-                String names = buildStringSerialized(pd.getMapOfRegisteredNames());
-                String inventories = buildStringSerialized(pd.getMapOfRegisteredInventories());
-                String lastActivePet = pd.getLastActivePet();
-                if (lastActivePet == null) lastActivePet = "";
-
-                StringBuilder data = new StringBuilder();
-
-                for (PetStats stats : PetStats.getPetStats(uuid)) {
-                    data.append(stats.serialize()).append(";;;");
-                }
-                if (data.length() > 0)
-                    data = new StringBuilder(data.substring(0, data.length() - 3));
-
-                getMySQL().preparedQuery("INSERT INTO " + table + " (uuid, names, inventories, data, lastActivePet) VALUES (?, ?, ?, ?, ?)",
-                        uuid.toString(), names, inventories, data.toString(), lastActivePet);
-            }
+    /** DB 스레드에 넘기고 끝날 때까지 기다린다 (서버 종료·리로드용). */
+    private static void writeAndWait(List<Snapshot> snapshots) {
+        if (snapshots.isEmpty()) return;
+        try {
+            EXECUTOR.submit(() -> snapshots.forEach(Databases::write)).get(30, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (Exception e) {
+            MCPets.getInstance().getLogger().log(Level.SEVERE, "[Database] 저장을 끝내지 못했습니다", e);
         }
     }
 
+    /**
+     * 에고버스: 메모리에 있는 모든 플레이어를 저장하고 끝날 때까지 기다린다 (서버 종료, /펫 리로드).
+     * 원본은 테이블을 TRUNCATE 한 뒤 다시 넣어서, 그 사이 다른 저장과 겹치면 데이터가 사라질 수 있었다.
+     */
+    public static void saveData() {
+        if (!GlobalConfig.getInstance().isDatabaseSupport())
+            return;
+        List<Snapshot> snapshots = new ArrayList<>();
+        for (UUID uuid : new ArrayList<>(PlayerData.getRegisteredData().keySet())) {
+            if (loading(uuid)) continue; // 아직 불러오는 중: DB 에 있는 쪽이 최신
+            Snapshot s = snapshot(uuid);
+            if (s != null) snapshots.add(s);
+        }
+        writeAndWait(snapshots);
+    }
+
+    /** 한 명을 저장하고 끝날 때까지 기다린다. 평소에는 {@link #savePlayerDataAsync} 를 쓴다. */
     public static void savePlayerData(UUID playerUUID) {
         if (!GlobalConfig.getInstance().isDatabaseSupport())
             return;
-        if (!PlayerData.isRegistered(playerUUID))
+        if (loading(playerUUID)) return;
+        Snapshot s = snapshot(playerUUID);
+        if (s != null) writeAndWait(List.of(s));
+    }
+
+    /** 한 명을 저장한다: 내용은 지금 만들고, DB 쓰기는 DB 스레드에서 순서대로. */
+    public static void savePlayerDataAsync(UUID playerUUID) {
+        if (!GlobalConfig.getInstance().isDatabaseSupport())
             return;
-
-        synchronized (getLockForPlayer(playerUUID)) {
-            PlayerData pd = PlayerData.getRegisteredData().get(playerUUID);
-
-            String names = buildStringSerialized(pd.getMapOfRegisteredNames());
-            String inventories = buildStringSerialized(pd.getMapOfRegisteredInventories());
-            String lastActivePet = pd.getLastActivePet();
-            if (lastActivePet == null) lastActivePet = "";
-
-            StringBuilder data = new StringBuilder();
-
-            for (PetStats stats : PetStats.getPetStats(playerUUID)) {
-                data.append(stats.serialize()).append(";;;");
-            }
-            if (data.length() > 0)
-                data = new StringBuilder(data.substring(0, data.length() - 3));
-
-            // First, delete the existing data for the player
-            getMySQL().preparedQuery("DELETE FROM " + table + " WHERE uuid=?", playerUUID.toString());
-
-            // Then, insert the new data for the player
-            getMySQL().preparedQuery("INSERT INTO " + table + " (uuid, names, inventories, data, lastActivePet) VALUES (?, ?, ?, ?, ?)",
-                    playerUUID.toString(), names, inventories, data.toString(), lastActivePet);
+        // 접속 직후 아직 불러오는 중이면, 비어 있는 데이터로 DB 를 덮지 않게 불러오기가 끝난 뒤에 저장한다.
+        if (loading(playerUUID)) {
+            LOADS.get(playerUUID).thenRun(() -> {
+                if (!MCPets.getInstance().isEnabled()) return;
+                if (org.bukkit.Bukkit.isPrimaryThread()) savePlayerDataAsync(playerUUID);
+                else org.bukkit.Bukkit.getScheduler().runTask(MCPets.getInstance(), () -> savePlayerDataAsync(playerUUID));
+            });
+            return;
         }
+        Snapshot s = snapshot(playerUUID);
+        if (s != null) EXECUTOR.execute(() -> write(s));
     }
 
     // -------------------------------------------------------------------------
@@ -353,6 +427,13 @@ public class Databases {
     }
 
     public static void closeConnection() {
+        // 남은 DB 작업을 끝내고 스레드를 멈춘다.
+        EXECUTOR.shutdown();
+        try {
+            EXECUTOR.awaitTermination(30, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         if (!GlobalConfig.getInstance().isDatabaseSupport())
             return;
 

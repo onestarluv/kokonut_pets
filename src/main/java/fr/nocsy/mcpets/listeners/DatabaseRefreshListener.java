@@ -19,7 +19,8 @@ public class DatabaseRefreshListener implements Listener {
         if (GlobalConfig.getInstance().isDatabaseSupport()) {
             // TODO: that is quite a heavy trick, I'm not really sure how it is going to impact the performances
             // Any feedback on it would be highly appreciated
-            Databases.loadData(e.getPlayer().getUniqueId());
+            // 에고버스: 비동기로 한 번만 읽는다 (펫 재소환은 PetListener 가 읽기가 끝난 뒤에)
+            Databases.loadDataAsync(e.getPlayer().getUniqueId());
         }
     }
 
@@ -47,7 +48,7 @@ public class DatabaseRefreshListener implements Listener {
         if (GlobalConfig.getInstance().isDatabaseSupport()) {
             UUID owner = e.getPet().getOwner();
             if (owner != null) {
-                Databases.savePlayerData(owner);
+                Databases.savePlayerDataAsync(owner);
             }
         }
     }
@@ -57,8 +58,9 @@ public class DatabaseRefreshListener implements Listener {
         if (GlobalConfig.getInstance().isDatabaseSupport()) {
             UUID owner = e.getPlayer().getUniqueId();
             if (PlayerData.isRegistered(owner)) {
-                Databases.savePlayerData(owner);
+                Databases.savePlayerDataAsync(owner);
             }
+            Databases.forgetLoad(owner);
         }
     }
 }

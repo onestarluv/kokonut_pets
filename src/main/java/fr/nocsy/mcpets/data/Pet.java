@@ -1298,7 +1298,8 @@ public class Pet {
 
                         @Override
                         public void run() {
-                            setNameTag(currentName, false);
+                            // 에고버스: 이름이 없으면 이름표를 비운다 ("없음"이 마우스를 대면 보이던 문제).
+                            setNameTag(null, false);
                         }
                     }.runTaskLater(MCPets.getInstance(), 10L);
 
@@ -1424,6 +1425,7 @@ public class Pet {
      */
     public void setNameTag(String name, final boolean visible) {
         if (isStillHere()) {
+            if (name != null && name.isBlank()) name = null;
             if (name != null) {
                 name = name.replace("'", " ");
                 name = Utils.convertRawHexToMiniMessage(name);
