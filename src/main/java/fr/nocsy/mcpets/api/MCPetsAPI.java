@@ -251,6 +251,39 @@ public class MCPetsAPI {
         return true;
     }
 
+    /** 펫 이름 최대 길이 (설정 MaxNameLength). */
+    public static int maxNameLength() {
+        return fr.nocsy.mcpets.data.config.GlobalConfig.getInstance().getMaxNameLength();
+    }
+
+    /**
+     * 다이얼로그에서 받은 이름으로 바꾼다 (채팅 입력과 같은 규칙: 금지어, 색 코드 권한, 길이). 빈 문자열이면 이름을 지운다.
+     * 결과를 채팅으로 알리고, 바꾸지 못했으면 false.
+     */
+    public static boolean setName(final Player p, final String petId, String name) {
+        final Pet active = live(p, petId);
+        if (active == null) {
+            fr.nocsy.mcpets.data.config.Language.REVOKED_BEFORE_CHANGES.sendMessage(p);
+            return false;
+        }
+        name = name == null ? "" : name.replace("'", "").replace(";;", ";").strip();
+        if (name.isEmpty()) {
+            active.setDisplayName(fr.nocsy.mcpets.data.config.Language.TAG_TO_REMOVE_NAME.getMessage(), true);
+            fr.nocsy.mcpets.data.config.Language.NICKNAME_CHANGED_SUCCESSFULY.sendMessage(p);
+            return true;
+        }
+        final String blocked = fr.nocsy.mcpets.utils.Utils.isInBlackList(name);
+        if (blocked != null) {
+            fr.nocsy.mcpets.data.config.Language.BLACKLISTED_WORD.sendMessageFormatted(p,
+                    new fr.nocsy.mcpets.data.config.FormatArg("%word%", blocked));
+            return false;
+        }
+        final boolean stripColor = !p.hasPermission(fr.nocsy.mcpets.PPermission.COLOR.getPermission());
+        active.setDisplayName(name, true, stripColor);
+        fr.nocsy.mcpets.data.config.Language.NICKNAME_CHANGED_SUCCESSFULY.sendMessage(p);
+        return true;
+    }
+
     /** 스킨 선택 화면(상자). 소환 중이 아니면 false. */
     public static boolean skins(final Player p, final String petId) {
         final Pet active = live(p, petId);
