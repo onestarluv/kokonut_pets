@@ -28,6 +28,9 @@ public class MCPetsCommandTabCompleter implements TabCompleter {
                                                 @NotNull String[] args) {
 
         ArrayList<String> completed = new ArrayList<>();
+        // 에고버스: 한국어 하위 명령어를 원래 인자로 바꿔 판단하고, 보여 주는 이름은 한국어.
+        final String[] typed = args;
+        args = fr.nocsy.mcpets.commands.KoreanArgs.pet(args);
 
         if (cmd.getName().equalsIgnoreCase("mcpets")) {
 
@@ -37,8 +40,7 @@ public class MCPetsCommandTabCompleter implements TabCompleter {
 
                 // User-facing commands available to all players
                 if (args.length == 1) {
-                    completed.add("menu");
-                    completed.add("name");
+                    completed.addAll(fr.nocsy.mcpets.commands.KoreanArgs.PET_PLAYER);
                 }
                 else if (args.length == 2 && args[0].equalsIgnoreCase("menu")) {
                     completed.addAll(Pet.getActivePetsForOwner(p.getUniqueId())
@@ -50,23 +52,12 @@ public class MCPetsCommandTabCompleter implements TabCompleter {
 
                 if (!p.hasPermission(PPermission.ADMIN.getPermission()))
                     return completed.stream()
-                            .filter(s -> s.toLowerCase().startsWith(args[args.length - 1].toLowerCase()))
+                            .filter(s -> s.toLowerCase().startsWith(typed[typed.length - 1].toLowerCase()))
                             .sorted()
                             .collect(Collectors.toList());
 
                 if (args.length == 1) {
-                    completed.add("reload");
-                    completed.add("editor");
-                    completed.add("spawn");
-                    completed.add("open");
-                    completed.add("inventory");
-                    completed.add("revoke");
-                    completed.add("signalstick");
-                    completed.add("item");
-                    completed.add("clearStats");
-                    completed.add("petFood");
-                    completed.add("category");
-                    completed.add("debug");
+                    completed.addAll(fr.nocsy.mcpets.commands.KoreanArgs.PET_ADMIN);
                 }
 
                 else if (args.length == 2) {
@@ -79,10 +70,7 @@ public class MCPetsCommandTabCompleter implements TabCompleter {
                             break;
                         case "item":
                             completed.addAll(ItemsListConfig.getInstance().listKeys());
-                            completed.add("add");
-                            completed.add("remove");
-                            completed.add("give");
-                            completed.add("list");
+                            completed.addAll(fr.nocsy.mcpets.commands.KoreanArgs.ITEM_ACTIONS);
                             break;
                         case "clearstats":
                             completed.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
@@ -138,7 +126,7 @@ public class MCPetsCommandTabCompleter implements TabCompleter {
         Collections.sort(completed);
 
         // Filter results based on what the player has typed so far
-        String partial = args[args.length - 1].toLowerCase();
+        String partial = typed[typed.length - 1].toLowerCase();
         return completed.stream()
                 .filter(s -> s.toLowerCase().startsWith(partial))
                 .collect(Collectors.toList());

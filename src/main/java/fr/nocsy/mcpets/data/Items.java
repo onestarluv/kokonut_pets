@@ -98,7 +98,7 @@ public enum Items {
     private static ItemStack unknown() {
         ItemStack it = new ItemStack(Material.BEDROCK);
         ItemMeta meta = it.getItemMeta();
-        meta.displayName(Utils.toComponent("Unknown"));
+        meta.displayName(Utils.toComponent("알 수 없음"));
         meta.lore(new ArrayList<>());
         PDCTag.set(meta, "AlmPet;Unknown");
 

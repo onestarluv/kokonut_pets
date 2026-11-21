@@ -63,10 +63,10 @@ public class PetFoodBuff {
         Debugger.send("§7Applying buff §a" + type.name() + "§7 on §6" + pet.getId() + "§7 for §a" + duration + "§7 ticks.");
         Debugger.send("§7Buff information: " +
                 "  \nPet owner is §b" + pet.getOwner() +
-                "  \n§aType: §7" + type.name() +
-                "  \n§aPower: §7" + power +
-                "  \n§aOperator: §7" + operator.name() +
-                "  \n§aDuration: §7" + duration + "§7 ticks.");
+                "  \n§a종류: §7" + type.name() +
+                "  \n§a위력: §7" + power +
+                "  \n§a연산: §7" + operator.name() +
+                "  \n§a지속 시간: §7" + duration + "§7틱");
 
         PetFoodBuff instance = this;
 

@@ -173,8 +173,8 @@ public class PetInteractionMenuListener implements Listener {
     }
 
     private void openBackPetMenu(final Player p) {
-        final PetMenu menu = new PetMenu(p, 0);
-        menu.open(p);
+        // 에고버스: Kokonut_UI 펫 화면이 있으면 그쪽으로 돌아간다.
+        fr.nocsy.mcpets.api.MCPetsAPI.openMenu(p);
     }
 
     private void openBackMountMenu(final Player p) {

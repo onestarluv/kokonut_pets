@@ -23,8 +23,9 @@ public class Databases {
     @Setter
     public static MySQLDB mySQL;
 
-    private static String table = GlobalConfig.getInstance().getMySQL_Prefix() + "mcpets_player_data";
-    private static String activeTable = GlobalConfig.getInstance().getMySQL_Prefix() + "mcpets_active_pet";
+    // 에고버스: Kokonut-Core DB 의 테이블 접두사를 쓴다 (init 에서 정해진다).
+    private static String table = "mcpets_player_data";
+    private static String activeTable = "mcpets_active_pet";
     private static ConcurrentHashMap<UUID, Object> playerLocks = new ConcurrentHashMap<>();
 
     // -------------------------------------------------------------------------
@@ -55,24 +56,30 @@ public class Databases {
         public long   getUpdatedAt() { return updatedAt; }
     }
 
+    /**
+     * 에고버스: Kokonut-Core 공용 DB 풀을 쓴다. 접속 설정(config.yml 의 MySQL 항목)은 없다.
+     * Core DB 를 못 쓰면 YAML(PlayerData 폴더)로 저장한다.
+     */
     public static boolean init() {
-        if (GlobalConfig.getInstance().isDisableMySQL()) {
-            MCPets.getInstance().getLogger().info("MySQL is disabled. Flat support will be used.");
-            return false;
-        }
-        Databases.setMySQL(new MySQLDB(GlobalConfig.getInstance().getMySQL_USER(),
-                GlobalConfig.getInstance().getMySQL_PASSWORD(),
-                GlobalConfig.getInstance().getMySQL_HOST(),
-                GlobalConfig.getInstance().getMySQL_PORT(),
-                GlobalConfig.getInstance().getMySQL_DB()));
-        if (!Databases.getMySQL().init()) {
-            MCPets.getInstance().getLogger().info("[Database] Can't initialize MySQL.");
-            MCPets.getInstance().getLogger().info("[Database] Will be using YAML support instead (no worry it's not a bug).");
+        final kr.gomsv.kokonutCore.api.database.CoreDatabase core =
+                org.bukkit.Bukkit.getServicesManager().load(kr.gomsv.kokonutCore.api.database.CoreDatabase.class);
+        if (core == null) {
+            MCPets.getInstance().getLogger().severe("[Database] Kokonut-Core DB 서비스가 없어 YAML 로 저장합니다.");
             GlobalConfig.getInstance().setDatabaseSupport(false);
             return false;
         }
+        Databases.setMySQL(new MySQLDB(core));
+        if (!Databases.getMySQL().init()) {
+            MCPets.getInstance().getLogger().severe("[Database] Kokonut-Core DB 에 연결하지 못해 YAML 로 저장합니다.");
+            GlobalConfig.getInstance().setDatabaseSupport(false);
+            return false;
+        }
+        table = getMySQL().tablePrefix() + "mcpets_player_data";
+        activeTable = getMySQL().tablePrefix() + "mcpets_active_pet";
         GlobalConfig.getInstance().setDatabaseSupport(true);
         createSQLTables();
+        fr.nocsy.mcpets.data.livingpets.PickupFilters.initDatabase(getMySQL().tablePrefix());
+        MCPets.getInstance().getLogger().info("[Database] Kokonut-Core DB 사용: " + table + ", " + activeTable);
         return true;
     }
 
@@ -81,8 +88,8 @@ public class Databases {
             return;
         getMySQL().query("CREATE TABLE IF NOT EXISTS " + table + " (id INT NOT NULL AUTO_INCREMENT, uuid TEXT, names TEXT, inventories LONGTEXT, data LONGTEXT, lastActivePet TEXT, primary key (id));");
         getMySQL().query("ALTER TABLE " + table + " MODIFY inventories LONGTEXT, MODIFY data LONGTEXT;");
-        ResultSet rs = getMySQL().preparedQuery("SELECT count(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = 'lastActivePet'",
-                GlobalConfig.getInstance().getMySQL_DB(), table);
+        ResultSet rs = getMySQL().preparedQuery("SELECT count(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = 'lastActivePet'",
+                table);
         try {
             if (rs != null && rs.next() && rs.getInt(1) == 0) {
                  getMySQL().query("ALTER TABLE " + table + " ADD lastActivePet TEXT;");

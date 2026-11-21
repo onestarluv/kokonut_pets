@@ -85,23 +85,15 @@ public class PetListener implements Listener {
                 pet.setLastInteractedWith(p);
                 menu.open(p);
             } else {
-                PetInteractionMenu menu = new PetInteractionMenu(pet, p.getUniqueId());
                 pet.setLastInteractedWith(p);
-                menu.open(p);
+                // 에고버스: 주인은 Kokonut_UI 펫 화면(이 펫 선택), 없으면 기본 상자 메뉴.
+                if (!fr.nocsy.mcpets.api.MCPetsAPI.openOverride(p, pet.getId())) {
+                    PetInteractionMenu menu = new PetInteractionMenu(pet, p.getUniqueId());
+                    menu.open(p);
+                }
             }
         }
-        if (pet != null && p.isOp()) {
-            // Check if this is a mount and open the appropriate menu
-            if (pet.isMount()) {
-                MountInteractionMenu menu = new MountInteractionMenu(pet, pet.getOwner());
-                pet.setLastOpInteracted(p);
-                menu.open(p);
-            } else {
-                PetInteractionMenu menu = new PetInteractionMenu(pet, pet.getOwner());
-                pet.setLastOpInteracted(p);
-                menu.open(p);
-            }
-        }
+        // 에고버스: 남의 펫은 OP 여도 아무 화면도 열지 않는다.
     }
 
     @EventHandler
@@ -122,27 +114,17 @@ public class PetListener implements Listener {
                 pet.setLastInteractedWith(p);
                 menu.open(p);
             } else {
-                PetInteractionMenu menu = new PetInteractionMenu(pet, p.getUniqueId());
                 pet.setLastInteractedWith(p);
-                menu.open(p);
+                // 에고버스: 주인은 Kokonut_UI 펫 화면(이 펫 선택), 없으면 기본 상자 메뉴.
+                if (!fr.nocsy.mcpets.api.MCPetsAPI.openOverride(p, pet.getId())) {
+                    PetInteractionMenu menu = new PetInteractionMenu(pet, p.getUniqueId());
+                    menu.open(p);
+                }
             }
             e.setCancelled(true);
             e.setDamage(0);
         }
-        if (pet != null && p.isOp()) {
-            // Check if this is a mount and open the appropriate menu
-            if (pet.isMount()) {
-                MountInteractionMenu menu = new MountInteractionMenu(pet, pet.getOwner());
-                pet.setLastOpInteracted(p);
-                menu.open(p);
-            } else {
-                PetInteractionMenu menu = new PetInteractionMenu(pet, pet.getOwner());
-                pet.setLastOpInteracted(p);
-                menu.open(p);
-            }
-            e.setCancelled(true);
-            e.setDamage(0);
-        }
+        // 에고버스: 남의 펫은 OP 여도 아무 화면도 열지 않는다.
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

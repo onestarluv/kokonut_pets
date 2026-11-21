@@ -19,39 +19,23 @@ public class LanguageConfig extends AbstractConfig {
         return instance;
     }
 
+    /**
+     * 에고버스: 문구는 {@link Language} 기본값(한국어)으로 고정한다. language.yml 은 만들지도 읽지도 않는다.
+     */
     public void init() {
-        super.init("", "language.yml");
-
-        for (final Language lang : Language.values()) {
-            if (getConfig().get(lang.name().toLowerCase()) == null)
-                getConfig().set(lang.name().toLowerCase(), lang.getMessage());
-        }
-
-        save();
         reload();
     }
 
     @Override
     public void save() {
-        super.save();
+        // 파일 없음
     }
 
     @Override
     public void reload() {
-        loadConfig();
         map.clear();
-
-        for (final Language lang : Language.values()) {
-            if (getConfig().get(lang.name().toLowerCase()) != null)
-                map.put(lang.name().toLowerCase(), getConfig().getString(lang.name().toLowerCase()));
-
-            lang.reload();
-        }
-
         if (Language.PET_INVENTORY_TITLE.getMessage().equals(Language.INVENTORY_PETS_MENU_INTERACTIONS.getMessage())) {
-            MCPets.getLog().severe("Interaction menu and prime menu have the same name, which might lead to unexpected behaviors. Please consider having different names for both menus.");
+            MCPets.getLog().severe("Interaction menu and prime menu have the same name, which might lead to unexpected behaviors.");
         }
-
-        MCPets.getLog().info("Language file reloaded.");
     }
 }

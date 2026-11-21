@@ -25,35 +25,35 @@ import fr.nocsy.mcpets.data.inventories.PetInventoryHolder;
 
 public enum EditorState {
 
-    DEFAULT("No title - Default"),
+    DEFAULT("제목 없음"),
 
     // First menu
-    GLOBAL_EDITOR("What do you want to edit?"),
+    GLOBAL_EDITOR("무엇을 편집할까요?"),
 
     // Second dive menu
-    CONFIG_EDITOR("Click a config option to edit"),
-    PET_EDITOR("Click a pet you want to edit"),
-    CATEGORY_EDITOR("Click a category you want to edit"),
-    ITEM_EDITOR("Click an item you want to edit"),
-    PETFOOD_EDITOR("Click a pet food you want to edit"),
+    CONFIG_EDITOR("편집할 설정을 고르세요"),
+    PET_EDITOR("편집할 펫을 고르세요"),
+    CATEGORY_EDITOR("편집할 카테고리를 고르세요"),
+    ITEM_EDITOR("편집할 아이템을 고르세요"),
+    PETFOOD_EDITOR("편집할 펫 먹이를 고르세요"),
 
     // Pet editor menu
-    PET_EDITOR_EDIT("Edit the pet"),
-    PET_EDITOR_LEVELS("Edit the living pet features"),
-    PET_EDITOR_SKINS("Edit the skins of the pet"),
+    PET_EDITOR_EDIT("펫 편집"),
+    PET_EDITOR_LEVELS("성장형 펫 기능 편집"),
+    PET_EDITOR_SKINS("펫 스킨 편집"),
     // Levels editor menu
-    PET_EDITOR_LEVEL_EDIT("Edit the level features"),
+    PET_EDITOR_LEVEL_EDIT("레벨 편집"),
     // Skins editor menu
-    PET_EDITOR_SKIN_EDIT("Edit the skin parameters"),
+    PET_EDITOR_SKIN_EDIT("스킨 편집"),
 
     // Categories editor menu
-    CATEGORY_EDITOR_EDIT("Edit the category"),
+    CATEGORY_EDITOR_EDIT("카테고리 편집"),
 
     // Item editor menu
-    ITEM_EDITOR_EDIT("Edit the item"),
+    ITEM_EDITOR_EDIT("아이템 편집"),
 
     // Petfood editor menu
-    PETFOOD_EDITOR_EDIT("Edit the pet food");
+    PETFOOD_EDITOR_EDIT("펫 먹이 편집");
 
 
     private static final int INV_SIZE = 54;

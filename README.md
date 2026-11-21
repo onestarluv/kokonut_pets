@@ -11,9 +11,9 @@ Looking for help ? Join the [Discord](https://discord.com/invite/p7QTm2gUyf) !
 
 <img src="https://i.imgur.com/KadwjCO.png" alt="Features">
 
-⭕ **3D modeled pets** with ANY behavior, skills, effects and more based on MythicMobs and ModelEngine
+⭕ **3D modeled pets** with behaviors, skills, and effects from MythicMobs and Kokonut_Model
 
-⭕ Create **mounts** using ModelEngine and implement them easily with MCPets
+⭕ Create **mounts** using Kokonut_Model and use them with Kokonut_Pets
 
 ⭕ Unique **inventory** per pet
 

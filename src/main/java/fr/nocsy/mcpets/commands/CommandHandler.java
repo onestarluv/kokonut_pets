@@ -27,7 +27,9 @@ public class CommandHandler implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         for (CCommand cmd : commands) {
             if (cmd.getName().equalsIgnoreCase(command.getName())) {
-                cmd.execute(sender, command, label, args);
+                // 에고버스: 한국어 하위 명령어를 원래 인자로 바꿔 넘긴다.
+                String[] normalized = cmd instanceof MountsCommand ? KoreanArgs.mount(args) : KoreanArgs.pet(args);
+                cmd.execute(sender, command, label, normalized);
             }
         }
 

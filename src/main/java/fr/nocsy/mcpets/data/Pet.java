@@ -99,6 +99,11 @@ public class Pet {
     @Getter
     private String mythicMobName;
 
+    /** 에고버스: 펫 종류의 고정 등급 이름 (ItemRarity), 없으면 null. */
+    @Setter
+    @Getter
+    private String rarity;
+
     @Setter
     @Getter
     private String permission;
@@ -849,7 +854,7 @@ public class Pet {
         // Set the owner
         this.owner = owner;
 
-        // Set the MythicMob owner with a delay so it will not conflict with ModelEngine
+        // Set the MythicMob owner after the model has been initialized.
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -1346,6 +1351,7 @@ public class Pet {
         pet.setTamingProgressSkill(tamingProgressSkill);
         pet.setTamingOverSkill(tamingOverSkill);
         pet.setMountable(mountable);
+        pet.setRarity(rarity);
         pet.setMountPermission(mountPermission);
         pet.setDespawnOnDismount(despawnOnDismount);
         pet.setMountType(mountType);
@@ -1514,7 +1520,7 @@ public class Pet {
      */
     public ItemStack buildItem(ItemStack item, final boolean showStats, final String localizedName, String iconName, final List<String> description, final String materialType, final int customModelData, final String textureBase64, final String itemModel, final String tooltipStyle) {
         final Material mat = materialType != null ? Material.getMaterial(materialType) : null;
-        if (iconName == null) iconName = "§cUndefined";
+        if (iconName == null) iconName = "§c정해지지 않음";
         iconName = Utils.applyPlaceholders(owner, iconName);
 
         final List<Component> desc = new ArrayList<>();
@@ -1667,8 +1673,11 @@ public class Pet {
         setPetStats();
 
         int inventorySize = 0;
-        if (petStats == null) inventorySize = defaultInventorySize;
-        else inventorySize = petStats.getExtendedInventorySize();
+        final kr.gomsv.kokonutCore.api.item.ItemRarity fixed = fr.nocsy.mcpets.api.MCPetsAPI.speciesRarity(this);
+        if (fixed != null) inventorySize = 9 * (fixed.ordinal() + 1);
+        else if (petStats == null || petStats.getCurrentLevel() == null) inventorySize = defaultInventorySize;
+        // 에고버스: 등급(Core 공통 등급)마다 한 줄 — 커먼 1줄(9칸) ~ 미스틱 6줄(54칸). InventorySize·InventoryExtension 설정은 쓰지 않는다.
+        else inventorySize = 9 * (fr.nocsy.mcpets.api.MCPetsAPI.rarity(this, petStats.getCurrentLevel()).ordinal() + 1);
 
         while (inventorySize % 9 != 0) {
             inventorySize++;

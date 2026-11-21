@@ -29,8 +29,8 @@ public class MountsCommandTabCompleter implements TabCompleter {
         Player p = (Player) commandSender;
 
         if (args.length == 1) {
-            completed.add("menu");
-        } else if (args.length == 2 && args[0].equalsIgnoreCase("menu")) {
+            completed.addAll(fr.nocsy.mcpets.commands.KoreanArgs.MOUNT_ARGS);
+        } else if (args.length == 2 && fr.nocsy.mcpets.commands.KoreanArgs.mount(args)[0].equalsIgnoreCase("menu")) {
             completed.addAll(Pet.getActivePetsForOwner(p.getUniqueId())
                     .stream()
                     .filter(Pet::isMountable)

@@ -1,25 +1,24 @@
-name: '${project.name}'
-version: '${project.version}'
-description: MCModels affiliate plugin. Join the workshop! https://discord.gg/p7QTm2gUyf
+name: Kokonut_Pets
+version: '${version}'
+description: 에고버스 펫 플러그인
 load: POSTWORLD
-author: Nocsy
-website: 'https://mcpets.gitbook.io/mcpets'
+authors: [pingpong, Nocsy]
+website: https://wiki.egoverse.kr
 
 main: fr.nocsy.mcpets.MCPets
-api-version: 1.21
+api-version: '26.3'
 database: false
-prefix: '${project.name}'
+provides: [MCPets]
 depend:
+  - Kokonut-Core
   - MythicMobs
-softdepend:
-  - ModelEngine
-  - BetterModel
   - Kokonut_Model
+softdepend:
   - Nexo
-  - WorldGuard
+  - Kokonut_Guard
+  - WorldEdit
   - LuckPerms
   - PlaceholderAPI
-  - ItemsAdder
 loadbefore: []
 
 # Plugin messaging channel "mcpets:sync" is registered in code via Bukkit.getMessenger()
@@ -27,20 +26,23 @@ loadbefore: []
 
 commands:
   mcpets:
-    description: Command to manage your pets
-    Usage: /mcpets
+    description: 펫 메뉴를 열어요. 관리자는 /펫 <리로드|소환|회수|열기|가방|아이템|먹이|신호봉|카테고리|통계초기화|편집기|디버그>
+    usage: /펫 [메뉴|이름]
     permission: mcpets.use
-    aliases: [pets]
+    aliases: [펫]
   mcmounts:
-    description: Command to view your mounts
-    Usage: /mcmounts
+    description: 탈것 메뉴를 열어요.
+    usage: /탈것 [메뉴]
     permission: mcpets.use
-    aliases: [mounts]
+    aliases: [탈것]
 
 permissions:
   mcpets.use:
+    description: /펫, /탈것 사용
     default: true
   mcpets.admin:
+    description: 펫 관리자 명령어
     default: op
   mcpets.color:
+    description: 펫 이름에 색 코드 사용
     default: op

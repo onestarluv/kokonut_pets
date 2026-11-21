@@ -68,7 +68,7 @@ public class PetConfig extends AbstractConfig {
             getConfig().set("SpawnRange", 3);
         if (getConfig().get("ComingBackRange") == null)
             getConfig().set("ComingBackRange", 3);
-        reorderKeys("Id", "MythicMob", "Permission", "Distance", "SpawnRange", "ComingBackRange",
+        reorderKeys("Id", "MythicMob", "Rarity", "Permission", "Distance", "SpawnRange", "ComingBackRange",
                 "Mountable", "MountType", "MountPermission", "DespawnOnDismount", "AutoRide",
                 "Invulnerable", "InventorySize", "UseDefaultMythicMobsName",
                 "DespawnSkill", "SpawnSkill", "Taming", "Icon", "Signals", "Levels");
@@ -83,7 +83,7 @@ public class PetConfig extends AbstractConfig {
      */
     public static void loadPets(final String folderPath, final boolean clearPets) {
         if (clearPets) {
-            Bukkit.getConsoleSender().sendMessage("§9Loading pets... ");
+            fr.nocsy.mcpets.utils.Chat.send(Bukkit.getConsoleSender(), "§9Loading pets... ");
             Pet.getObjectPets().clear();
         }
 
@@ -102,7 +102,7 @@ public class PetConfig extends AbstractConfig {
 
             if (petConfig.getPet() != null) {
                 if (Pet.getObjectPets().stream().anyMatch(pet -> pet.getId().equalsIgnoreCase(petConfig.getPet().getId())))
-                    Bukkit.getConsoleSender().sendMessage("  §c* " + petConfig.getPet().getId() + " could not be loaded: another pet with the same ID already exists.");
+                    fr.nocsy.mcpets.utils.Chat.send(Bukkit.getConsoleSender(), "  §c* " + petConfig.getPet().getId() + " could not be loaded: another pet with the same ID already exists.");
                 else {
                     Debugger.send("  §7- " + petConfig.getPet().getId() + " loaded successfully.");
                     Pet.getObjectPets().add(petConfig.getPet());
@@ -179,6 +179,8 @@ public class PetConfig extends AbstractConfig {
         } else {
             pet.setMountable(getConfig().getBoolean("Mountable"));
         }
+        // 에고버스: 펫 종류의 고정 등급 (Core ItemRarity: COMMON ~ MYTHIC). 가방 줄 수·자동 줍기·색이 따른다.
+        pet.setRarity(getConfig().getString("Rarity"));
         if (mountType == null) mountType = "walking";
         pet.setDespawnOnDismount(despawnOnDismount);
         pet.setAutoRide(autoRide);
@@ -197,10 +199,10 @@ public class PetConfig extends AbstractConfig {
         pet.setTamingProgressSkill(tamingSkillName);
         pet.setTamingOverSkill(tamingOverSkillName);
 
-        final ItemStack icon = legacyItemRead(pet.getIcon(), true, pet.toString(), "§cIcon (not set)", "Icon");
+        final ItemStack icon = legacyItemRead(pet.getIcon(), true, pet.toString(), "§c아이콘 (설정 안 됨)", "Icon");
         pet.setIcon(icon);
 
-        final ItemStack signalStickItem = legacyItemRead(pet.getSignalStick(), false, Items.buildSignalStickTag(pet), "§cSignal stick (not set)", "Signals.Item");
+        final ItemStack signalStickItem = legacyItemRead(pet.getSignalStick(), false, Items.buildSignalStickTag(pet), "§c명령 막대 (설정 안 됨)", "Signals.Item");
         pet.setSignalStick(signalStickItem);
 
         reloadSkins();
@@ -383,7 +385,7 @@ public class PetConfig extends AbstractConfig {
             final String mythicMobId = getConfig().getString(key + ".MythicMob");
             final String skinPerm = getConfig().getString(key + ".Permission");
 
-            final ItemStack skinIcon = legacyItemRead(null, false, "", "§cSkin icon (not set)", key + ".Icon");
+            final ItemStack skinIcon = legacyItemRead(null, false, "", "§c스킨 아이콘 (설정 안 됨)", key + ".Icon");
 
             PetSkin.load(key, pet, mythicMobId, skinPerm, skinIcon);
         }

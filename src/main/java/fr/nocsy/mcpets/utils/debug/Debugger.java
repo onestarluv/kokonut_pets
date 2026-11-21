@@ -27,12 +27,12 @@ public class Debugger {
     public static void send(final String msg) {
         if (!isEnabled()) return;
 
-        Bukkit.getConsoleSender().sendMessage(Utils.toComponent("§7[MCPETS DEBUG]: §6" + msg));
+        fr.nocsy.mcpets.utils.Chat.send(Bukkit.getConsoleSender(), Utils.toComponent("§7[MCPETS DEBUG]: §6" + msg));
         for (final UUID uuid : listeners) {
             final Player p = Bukkit.getPlayer(uuid);
             if (p == null) continue;
 
-            p.sendMessage(Utils.toComponent("§7[DEBUG]: §6" + msg));
+            fr.nocsy.mcpets.utils.Chat.send(p, Utils.toComponent("§7[DEBUG]: §6" + msg));
         }
     }
 

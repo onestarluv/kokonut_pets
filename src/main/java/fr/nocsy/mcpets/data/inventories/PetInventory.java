@@ -41,7 +41,7 @@ public class PetInventory {
         this.pet = pet;
         this.pet.setOwner(owner);
 
-        String title = Language.PET_INVENTORY_TITLE.getMessageFormatted(new FormatArg("%pet%", pet.getIcon().getItemMeta().getDisplayName()));
+        String title = Language.PET_INVENTORY_TITLE.getMessageFormatted(new FormatArg("%pet%", net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText().serialize(pet.getIcon().getItemMeta().displayName())));
 
         this.inventory = new PetInventoryHolder(pet.getInventorySize(), title, PetInventoryHolder.Type.PET_INVENTORY_MENU).getInventory();
         if (premadeInventory != null) {

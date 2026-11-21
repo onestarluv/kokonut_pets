@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.UUID;
 
 /**
- * Abstraction layer over ModelEngine / BetterModel APIs.
+ * Pet model operations backed by Kokonut_Model.
  * Allows the plugin to work with either modeler transparently.
  */
 public interface AbstractModeler {

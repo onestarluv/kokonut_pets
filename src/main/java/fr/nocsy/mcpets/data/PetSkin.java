@@ -113,7 +113,7 @@ public class PetSkin {
 
         Inventory inventory = new PetInventoryHolder(invSize,
                 Language.PET_SKINS_TITLE.getMessageFormatted(
-                        new FormatArg("%pet%", pet.getIcon().getItemMeta().getDisplayName())),
+                        new FormatArg("%pet%", net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText().serialize(pet.getIcon().getItemMeta().displayName()))),
                 PetInventoryHolder.Type.PET_SKINS_MENU).getInventory();
 
         for (PetSkin petSkin : skins) {
@@ -173,9 +173,9 @@ public class PetSkin {
     private void initIcon() {
         icon = Items.UNKNOWN.getItem().clone();
         ItemMeta meta = icon.getItemMeta();
-        meta.setDisplayName("§6Skin §7: " + mythicMobId);
+        meta.setDisplayName("§6스킨 §7: " + mythicMobId);
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("§7Click to apply that skin");
+        lore.add("§7클릭하면 이 스킨을 적용해요");
         meta.setLore(lore);
         icon.setItemMeta(meta);
         prepareIcon();

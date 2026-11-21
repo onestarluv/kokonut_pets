@@ -40,7 +40,6 @@ import fr.nocsy.mcpets.data.config.PetFoodConfig;
 import fr.nocsy.mcpets.data.config.CategoryConfig;
 import fr.nocsy.mcpets.data.config.LanguageConfig;
 import fr.nocsy.mcpets.modeler.BetterModelModeler;
-import fr.nocsy.mcpets.modeler.ModelEngineModeler;
 import fr.nocsy.mcpets.data.config.AbstractConfig;
 import fr.nocsy.mcpets.compat.PlaceholderAPICompat;
 import fr.nocsy.mcpets.data.config.BlacklistConfig;
@@ -57,7 +56,6 @@ public class MCPets extends JavaPlugin {
 
     private static MythicBukkit mythicMobs;
     private static LuckPerms luckPerms;
-    private static boolean itemsAdderFound = false;
     private static boolean luckPermsNotFound = false;
     private static boolean nexoFound = false;
     private static boolean nexoChecked = false;
@@ -117,7 +115,6 @@ public class MCPets extends JavaPlugin {
         instance = this;
 
         // Reset static flags for PlugMan reload support
-        itemsAdderFound = false;
         nexoFound = false;
         nexoChecked = false;
         luckPermsNotFound = false;
@@ -128,18 +125,13 @@ public class MCPets extends JavaPlugin {
             return;
         }
 
-        if (!checkModeler()) {
-            getLog().severe("MCPets could not be loaded : Neither ModelEngine nor BetterModel could be found.");
-            return;
-        }
+        modeler = new BetterModelModeler();
 
         checkWorldGuard();
         checkLuckPerms();
         checkPlaceholderApi();
-        checkNexo();
-        checkItemsAdder();
-        if (!nexoFound && !itemsAdderFound) {
-            getLog().info("Neither Nexo nor ItemsAdder were found. Custom items features won't be available.");
+        if (!checkNexo()) {
+            getLog().info("Nexo was not found. Custom items features won't be available.");
         }
 
         try {
@@ -154,6 +146,9 @@ public class MCPets extends JavaPlugin {
     @Override
     public void onEnable() {
         CommandHandler.init(this);
+        // 에고버스: 레어 이상 펫 자동 줍기 (1초마다)
+        fr.nocsy.mcpets.data.livingpets.PetAutoPickup.start(this);
+        fr.nocsy.mcpets.data.livingpets.PickupFilters.start(this);
         EventListener.init(this);
         modeler.registerListeners(this);
 
@@ -280,15 +275,6 @@ public class MCPets extends JavaPlugin {
         return nexoFound;
     }
 
-    private static void checkItemsAdder() {
-        try {
-            Class.forName("dev.lone.itemsadder.api.CustomStack");
-            itemsAdderFound = true;
-        } catch (final ClassNotFoundException e) {
-            itemsAdderFound = false;
-        }
-    }
-
     /**
      * Check and initialize WorldGuard instance
      */
@@ -318,31 +304,6 @@ public class MCPets extends JavaPlugin {
         } catch (final NoClassDefFoundError error) {
             getLog().warning("MythicMobs could not be found.");
         }
-
-        return false;
-    }
-
-    /**
-     * Check and initialize the modeler (BetterModel or ModelEngine)
-     */
-    private static boolean checkModeler() {
-        if (modeler != null) return true;
-
-        // Try BetterModel first
-        try {
-            Class.forName("kr.toxicity.model.api.BetterModel");
-            modeler = new BetterModelModeler();
-            getLog().info("BetterModel found. Using BetterModel as modeler.");
-            return true;
-        } catch (final ClassNotFoundException ignored) {}
-
-        // Fallback to ModelEngine
-        try {
-            Class.forName("com.ticxo.modelengine.api.ModelEngineAPI");
-            modeler = new ModelEngineModeler();
-            getLog().info("ModelEngine found. Using ModelEngine as modeler.");
-            return true;
-        } catch (final ClassNotFoundException ignored) {}
 
         return false;
     }
@@ -377,13 +338,6 @@ public class MCPets extends JavaPlugin {
         if (luckPerms == null) checkLuckPerms();
 
         return luckPerms;
-    }
-
-    /**
-     * Check ItemsAdder is loaded or not
-     */
-    public static boolean isItemsAdderLoaded() {
-        return itemsAdderFound;
     }
 
     public static Logger getLog() {

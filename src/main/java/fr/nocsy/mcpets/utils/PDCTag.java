@@ -1,6 +1,5 @@
 package fr.nocsy.mcpets.utils;
 
-import fr.nocsy.mcpets.MCPets;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -8,14 +7,13 @@ import org.jetbrains.annotations.Nullable;
 
 public final class PDCTag {
 
-    private static NamespacedKey key;
+    // Keep tags on items written before the plugin was renamed.
+    private static final NamespacedKey KEY = NamespacedKey.fromString("mcpets:mcpets_tag");
 
     private PDCTag() {}
 
     public static NamespacedKey key() {
-        if (key == null)
-            key = new NamespacedKey(MCPets.getInstance(), "mcpets_tag");
-        return key;
+        return KEY;
     }
 
     /**

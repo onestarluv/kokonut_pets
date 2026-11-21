@@ -70,7 +70,7 @@ public class EditorGlobalListener implements Listener {
                 return;
 
             if (editorItem.name().contains("_DELETE") && e.getClick() != ClickType.SHIFT_LEFT) {
-                p.sendMessage("§c§lWARNING:§7 Are you sure you want to delete it ? Click §cSHIFT + CLICK§7 if so.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§c§l주의:§7 정말 삭제할까요? 삭제하려면 §cSHIFT + 클릭§7 하세요.");
                 return;
             }
 
@@ -123,7 +123,7 @@ public class EditorGlobalListener implements Listener {
 
                 if (changesMade) {
                     EditorItems.getCachedDeleted().add(pet.getId());
-                    p.sendMessage("§cThe pet §e" + pet.getId() + "§c was deleted successfully.");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§c펫 §e" + pet.getId() + "§c 을(를) 삭제했어요.");
                 }
 
                 editor.setState(EditorState.PET_EDITOR);
@@ -367,7 +367,7 @@ public class EditorGlobalListener implements Listener {
             }
 
             if (changesMade)
-                p.sendMessage("§aChanges saved! Make sure you §nreload MCPets§a to apply the changes.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§a저장했어요! 적용하려면 펫 플러그인을 §n다시 불러와§a 주세요.");
 
         }
 
@@ -379,7 +379,7 @@ public class EditorGlobalListener implements Listener {
             editorItem.setValue(EditorItems.RESET_VALUE_TAG);
             if (editorItem.save(p)) {
                 editor.openEditor();
-                p.sendMessage("§aThe feature was reseted successfully! Please §nreload§a MCPets so the changes take effect!");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§a값을 초기화했어요! 적용하려면 펫 플러그인을 §n다시 불러와§a 주세요.");
                 return true;
             }
         }

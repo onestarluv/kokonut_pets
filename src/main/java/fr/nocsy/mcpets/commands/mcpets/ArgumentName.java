@@ -15,7 +15,7 @@ import fr.nocsy.mcpets.listeners.PetInteractionMenuListener;
 public class ArgumentName extends AArgument {
 
     public ArgumentName(CommandSender sender, String[] args) {
-        super("name", new int[]{1}, sender, args, "/mcpets name [name]");
+        super("name", new int[]{1}, sender, args, "/펫 이름 [이름]");
     }
 
     @Override

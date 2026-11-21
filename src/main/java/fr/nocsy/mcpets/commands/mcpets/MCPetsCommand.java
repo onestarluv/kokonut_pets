@@ -37,8 +37,8 @@ public class MCPetsCommand implements CCommand {
         if (sender.hasPermission(getPermission())) {
 
             if (sender instanceof Player && args.length == 0) {
-                PetMenu menu = new PetMenu((Player) sender, 0);
-                menu.open((Player) sender);
+                // 에고버스: Kokonut_UI 가 등록돼 있으면 그 화면으로 연다.
+                fr.nocsy.mcpets.api.MCPetsAPI.openMenu((Player) sender);
                 return;
             }
 
@@ -72,7 +72,7 @@ public class MCPetsCommand implements CCommand {
             for(AArgument argument : outcomes) {
                 if(argument.nameMatchesButIncomplete()) {
                     if (argument.getUsage() != null) {
-                        sender.sendMessage("§cMissing arguments. Usage: §e" + argument.getUsage());
+                        fr.nocsy.mcpets.utils.Chat.send(sender, "§c인자가 부족해요. 사용법: §e" + argument.getUsage());
                     } else {
                         Language.USAGE.sendMessage(sender);
                     }

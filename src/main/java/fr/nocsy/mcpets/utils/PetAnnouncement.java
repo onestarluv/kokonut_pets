@@ -35,13 +35,13 @@ public enum PetAnnouncement {
                 break;
 
             case "chat":
-                p.sendMessage(Utils.toComponentWithPrefix(message));
+                fr.nocsy.mcpets.utils.Chat.send(p, Utils.toComponent(message));
                 break;
             case "actionbar":
                 p.sendActionBar(Utils.toComponent(message));
                 break;
             default:
-                p.sendMessage(Utils.toComponentWithPrefix(message));
+                fr.nocsy.mcpets.utils.Chat.send(p, Utils.toComponent(message));
         }
     }
 

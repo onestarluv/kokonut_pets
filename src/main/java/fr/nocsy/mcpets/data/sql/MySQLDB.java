@@ -1,149 +1,84 @@
 package fr.nocsy.mcpets.data.sql;
 
 import fr.nocsy.mcpets.MCPets;
-import fr.nocsy.mcpets.data.config.GlobalConfig;
-import org.bukkit.scheduler.BukkitRunnable;
+import kr.gomsv.kokonutCore.api.database.CoreDatabase;
 
-import java.sql.*;
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 
+/**
+ * 에고버스: Kokonut-Core 공용 커넥션 풀({@link CoreDatabase}) 위의 얇은 래퍼. 접속 정보는 Core 가 가진다.
+ * SELECT 결과는 {@link CachedRowSet} 으로 메모리에 담아 돌려주고 커넥션은 바로 풀에 반납한다
+ * (예전처럼 열린 ResultSet 을 들고 있지 않는다).
+ */
 public class MySQLDB {
 
-    private Connection sqlCon;
-    private String user;
-    private String pass;
-    private String ip;
-    private String port;
-    private String db;
+    private final CoreDatabase database;
 
-    /** Timestamp of the last successful connection validation. */
-    private long lastValidationTime = 0;
-    /** Minimum interval (ms) between connection validations. */
-    private static final long VALIDATION_INTERVAL_MS = 5000;
-
-    public MySQLDB(String user, String pass, String ip, String port, String db) {
-        this.user = user;
-        this.pass = pass;
-        this.ip = ip;
-        this.port = port;
-        this.db = db;
+    public MySQLDB(final CoreDatabase database) {
+        this.database = database;
     }
 
+    /** 풀에서 커넥션 하나를 빌려 확인한다. 실패하면 false. */
     public boolean init() {
-        if (this.user == null || this.pass == null || this.ip == null || this.port == null || this.db == null) {
-            MCPets.getInstance().getLogger().severe("Missing SQL parameter.");
-            MCPets.getInstance().getLogger().severe("User : " + user);
-            MCPets.getInstance().getLogger().severe("Pass : " + pass);
-            MCPets.getInstance().getLogger().severe("Host : " + ip);
-            MCPets.getInstance().getLogger().severe("Port : " + port);
-            MCPets.getInstance().getLogger().severe("DB : " + db);
-            return false;
-        }
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = urlBuilder();
-            this.sqlCon = DriverManager.getConnection(url, this.user, this.pass);
-        }
-        catch (Exception e) {
-            MCPets.getInstance().getLogger().severe("Could not reach SQL database. Please configure your database parameters.");
-            return false;
-        }
-        return true;
-    }
-
-    public void close() {
-        if (!GlobalConfig.getInstance().isDatabaseSupport())
-            return;
-        try {
-            this.sqlCon.close();
-        }
-        catch (Exception e) {
-            MCPets.getInstance().getLogger().log(Level.SEVERE, "Failed to close SQL connection", e);
-        }
-    }
-
-    public String urlBuilder() {
-        return "jdbc:mysql://" + this.ip + ":" + this.port + "/" + this.db;
-    }
-
-    private void ensureConnection() throws SQLException {
-        long now = System.currentTimeMillis();
-        if (now - lastValidationTime < VALIDATION_INTERVAL_MS) {
-            return;
-        }
-        if (!this.sqlCon.isValid(1)) {
-            this.sqlCon.close();
-            this.init();
-        }
-        lastValidationTime = now;
-    }
-
-    public ResultSet query(String s) {
-        if (!GlobalConfig.getInstance().isDatabaseSupport())
-            return null;
-        try {
-            ensureConnection();
-        } catch (SQLException e1) {
-            MCPets.getInstance().getLogger().log(Level.SEVERE, "Failed to validate SQL connection", e1);
-        }
-        ResultSet set = null;
-        try {
-            Statement stat = this.sqlCon.createStatement();
-            if (s.toLowerCase().startsWith("select")) {
-                set = stat.executeQuery(s);
-                closeStat(stat);
-            } else {
-                stat.executeUpdate(s);
-                stat.close();
-            }
-
+        try (Connection connection = database.openConnection()) {
+            return connection.isValid(2);
         } catch (SQLException e) {
-            MCPets.getInstance().getLogger().log(Level.SEVERE, "SQL query failed: " + s, e);
+            MCPets.getInstance().getLogger().log(Level.SEVERE, "Kokonut-Core DB 에 연결하지 못했습니다.", e);
+            return false;
         }
-        return set;
     }
 
-    public ResultSet preparedQuery(String sql, Object... params) {
-        if (!GlobalConfig.getInstance().isDatabaseSupport())
-            return null;
-        try {
-            ensureConnection();
-        } catch (SQLException e1) {
-            MCPets.getInstance().getLogger().log(Level.SEVERE, "Failed to validate SQL connection", e1);
+    /** 풀은 Core 소유라 닫지 않는다. */
+    public void close() {
+    }
+
+    public String tablePrefix() {
+        return database.tablePrefix();
+    }
+
+    public ResultSet query(final String sql) {
+        try (Connection connection = database.openConnection(); Statement stat = connection.createStatement()) {
+            if (isSelect(sql)) {
+                try (ResultSet rs = stat.executeQuery(sql)) {
+                    return cache(rs);
+                }
+            }
+            stat.executeUpdate(sql);
+        } catch (SQLException e) {
+            MCPets.getInstance().getLogger().log(Level.SEVERE, "SQL query failed: " + sql, e);
         }
-        ResultSet set = null;
-        try {
-            PreparedStatement pstmt = this.sqlCon.prepareStatement(sql);
-            for (int i = 0; i < params.length; i++) {
-                pstmt.setObject(i + 1, params[i]);
+        return null;
+    }
+
+    public ResultSet preparedQuery(final String sql, final Object... params) {
+        try (Connection connection = database.openConnection(); PreparedStatement stat = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) stat.setObject(i + 1, params[i]);
+            if (isSelect(sql)) {
+                try (ResultSet rs = stat.executeQuery()) {
+                    return cache(rs);
+                }
             }
-            if (sql.trim().toLowerCase().startsWith("select")) {
-                set = pstmt.executeQuery();
-                closeStat(pstmt);
-            } else {
-                pstmt.executeUpdate();
-                pstmt.close();
-            }
+            stat.executeUpdate();
         } catch (SQLException e) {
             MCPets.getInstance().getLogger().log(Level.SEVERE, "SQL prepared query failed: " + sql, e);
         }
-        return set;
+        return null;
     }
 
-    private void closeStat(final Statement stat) {
-        if (!GlobalConfig.getInstance().isDatabaseSupport())
-            return;
+    private static boolean isSelect(final String sql) {
+        return sql.trim().toLowerCase().startsWith("select");
+    }
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    MCPets.getInstance().getLogger().log(Level.SEVERE, "Failed to close SQL statement", e);
-                }
-            }
-        }.runTaskLater(MCPets.getInstance(), 5L);
-
+    private static ResultSet cache(final ResultSet rs) throws SQLException {
+        final CachedRowSet cached = RowSetProvider.newFactory().createCachedRowSet();
+        cached.populate(rs);
+        return cached;
     }
 }

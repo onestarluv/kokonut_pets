@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class ArgumentCategory extends AArgument {
 
     public ArgumentCategory(CommandSender sender, String[] args) {
-        super("category", new int[]{3, 2}, sender, args, "/mcpets category <categoryId> [player]");
+        super("category", new int[]{3, 2}, sender, args, "/펫 카테고리 <카테고리ID> [플레이어]");
     }
 
     @Override

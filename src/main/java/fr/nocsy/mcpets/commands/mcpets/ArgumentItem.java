@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class ArgumentItem extends AArgument {
 
     public ArgumentItem(CommandSender sender, String[] args) {
-        super("item", new int[]{3, 2}, sender, args, "/mcpets item <key|add|remove|give|list> [key]");
+        super("item", new int[]{3, 2}, sender, args, "/펫 아이템 <키|추가|삭제|지급|목록> [키]");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ArgumentItem extends AArgument {
             if (args[1].equalsIgnoreCase("list")) {
                 Language.KEY_LIST.sendMessage(p);
                 for(String keys : ItemsListConfig.getInstance().listKeys()) {
-                    p.sendMessage("§8- §7" + keys);
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§8- §7" + keys);
                 }
                 return;
             }

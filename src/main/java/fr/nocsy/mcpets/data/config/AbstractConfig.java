@@ -16,7 +16,8 @@ import java.util.logging.Level;
 public abstract class AbstractConfig {
 
     @Getter
-    private static final String path = "./plugins/MCPets/";
+    /** 에고버스: 플러그인 이름(Kokonut_Pets)의 데이터 폴더. 원본은 ./plugins/MCPets/ 고정이었다. */
+    private static final String path = "./plugins/Kokonut_Pets/";
 
     @Getter
     @Setter

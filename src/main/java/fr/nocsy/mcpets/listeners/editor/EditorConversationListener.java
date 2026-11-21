@@ -60,44 +60,44 @@ public class EditorConversationListener implements Listener {
         // If the output type isn't respected, ask for another one.
         if (!conversation.entryMatch(entry)) {
             if (conversation.getEditorItem().getType().equals(EditorExpectationType.MYTHICMOB)) {
-                p.sendMessage("§cThe mythicmob §e" + entry + "§c does not exist. Check your MythicMob mob file to obtain the right ID.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§cMythicMob §e" + entry + "§c 이(가) 없어요. MythicMobs 몹 파일에서 올바른 ID를 확인해 주세요.");
             }
             else if (conversation.getEditorItem().getType().equals(EditorExpectationType.SKILL)) {
-                p.sendMessage("§cThe skill §e" + entry + "§c does not exist. Check your MythicMob skills to obtain the right ID.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§c스킬 §e" + entry + "§c 이(가) 없어요. MythicMobs 스킬 파일에서 올바른 ID를 확인해 주세요.");
             }
             else if (conversation.getEditorItem().getType().equals(EditorExpectationType.PET_CREATE)) {
-                p.sendMessage("§cThe pet §e" + entry + "§c already exists. Please use another ID.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§c펫 §e" + entry + "§c 은(는) 이미 있어요. 다른 ID를 써 주세요.");
             }
             else {
-                p.sendMessage("§cThe expected type for this parameter is §6" + conversation.getEditorItem().getType().getName().replace("_", " "));
-                p.sendMessage("§cPlease try again with the right type.");
+                fr.nocsy.mcpets.utils.Chat.send(p, "§c이 항목에 넣을 값의 형식: §6" + conversation.getEditorItem().getType().getName().replace("_", " "));
+                fr.nocsy.mcpets.utils.Chat.send(p, "§c알맞은 형식으로 다시 입력해 주세요.");
                 if (conversation.getEditorItem().getType().equals(EditorExpectationType.ITEM_ID_OR_MATERIAL)) {
-                    p.sendMessage("§bPossible items id are:");
-                    p.sendMessage("§7" + ItemsListConfig.getInstance().getItems().keySet());
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 아이템 ID:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7" + ItemsListConfig.getInstance().getItems().keySet());
                 }
                 else if (conversation.getEditorItem().getType().equals(EditorExpectationType.PET_ID) ||
                         conversation.getEditorItem().getType().equals(EditorExpectationType.PETFOOD_PET_LIST_ADD) ||
                         conversation.getEditorItem().getType().equals(EditorExpectationType.PETFOOD_PET_LIST_REMOVE) ||
                         conversation.getEditorItem().getType().equals(EditorExpectationType.CATEGORY_PET_LIST_ADD) ||
                         conversation.getEditorItem().getType().equals(EditorExpectationType.CATEGORY_PET_LIST_REMOVE)) {
-                    p.sendMessage("§bPossible pet ids are:");
-                    p.sendMessage("§7" + Pet.getObjectPets().stream().map(Pet::getId).toList());
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 펫 ID:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7" + Pet.getObjectPets().stream().map(Pet::getId).toList());
                 }
                 else if (conversation.getEditorItem().getType().equals(EditorExpectationType.OPERATOR_TYPE) ) {
-                    p.sendMessage("§bPossible operators are:");
-                    p.sendMessage("§7" + Arrays.toString(PetMath.values()));
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 연산:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7" + Arrays.toString(PetMath.values()));
                 }
                 else if (conversation.getEditorItem().getType().equals(EditorExpectationType.MOUNT_TYPE) ) {
-                    p.sendMessage("§bPossible mount types are:");
-                    p.sendMessage("§7[walking, flying]");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 탈것 종류:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7[walking, flying]");
                 }
                 else if (conversation.getEditorItem().getType().equals(EditorExpectationType.ANNOUNCEMENT_TYPE)) {
-                    p.sendMessage("§bPossible announcement types are:");
-                    p.sendMessage("§7" + Arrays.toString(PetAnnouncement.values()));
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 알림 방식:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7" + Arrays.toString(PetAnnouncement.values()));
                 }
                 else if (conversation.getEditorItem().getType().equals(EditorExpectationType.PETFOOD_TYPE)) {
-                    p.sendMessage("§bPossible pet food types are:");
-                    p.sendMessage("§7" + Arrays.toString(PetFoodType.values()));
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§b사용할 수 있는 먹이 종류:");
+                    fr.nocsy.mcpets.utils.Chat.send(p, "§7" + Arrays.toString(PetFoodType.values()));
                 }
             }
             return;

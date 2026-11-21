@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class ArgumentSpawn extends AArgument {
 
     public ArgumentSpawn(CommandSender sender, String[] args) {
-        super("spawn", new int[]{4, 5}, sender, args, "/mcpets spawn <petId> <player> <checkPermission> [-s]");
+        super("spawn", new int[]{4, 5}, sender, args, "/펫 소환 <펫ID> <플레이어> <권한확인 true|false> [-s]");
     }
 
     @Override

@@ -32,14 +32,14 @@ public enum EditorItems {
     UNKNOWN(UNKNOWN(), null, null, null, null, false),
     FILLER(FILLER(), null, null, null, null, false),
 
-    BACK_TO_GLOBAL_SELECTION(BACK_TO_ITEM("global menu"), null, null, null, EditorState.GLOBAL_EDITOR, false),
-    BACK_TO_PET_SELECTION(BACK_TO_ITEM("pet selection menu"), null, null, null, EditorState.PET_EDITOR, false),
-    BACK_TO_PET_EDIT(BACK_TO_ITEM("pet editor"), null, null, null, EditorState.PET_EDITOR_EDIT, false),
-    BACK_TO_PET_LEVELS_EDIT(BACK_TO_ITEM("pet levels"), null, null, null, EditorState.PET_EDITOR_LEVELS, false),
-    BACK_TO_PET_SKINS_EDIT(BACK_TO_ITEM("pet skins"), null, null, null, EditorState.PET_EDITOR_SKINS, false),
-    BACK_TO_CATEGORIES_EDIT(BACK_TO_ITEM("categories"), null, null, null, EditorState.CATEGORY_EDITOR, false),
-    BACK_TO_ITEM_EDITOR(BACK_TO_ITEM("items"), null, null, null, EditorState.ITEM_EDITOR, false),
-    BACK_TO_PETFOOD_EDITOR(BACK_TO_ITEM("pet foods"), null, null, null, EditorState.PETFOOD_EDITOR, false),
+    BACK_TO_GLOBAL_SELECTION(BACK_TO_ITEM("전체 메뉴"), null, null, null, EditorState.GLOBAL_EDITOR, false),
+    BACK_TO_PET_SELECTION(BACK_TO_ITEM("펫 선택"), null, null, null, EditorState.PET_EDITOR, false),
+    BACK_TO_PET_EDIT(BACK_TO_ITEM("펫 편집"), null, null, null, EditorState.PET_EDITOR_EDIT, false),
+    BACK_TO_PET_LEVELS_EDIT(BACK_TO_ITEM("펫 레벨"), null, null, null, EditorState.PET_EDITOR_LEVELS, false),
+    BACK_TO_PET_SKINS_EDIT(BACK_TO_ITEM("펫 스킨"), null, null, null, EditorState.PET_EDITOR_SKINS, false),
+    BACK_TO_CATEGORIES_EDIT(BACK_TO_ITEM("카테고리"), null, null, null, EditorState.CATEGORY_EDITOR, false),
+    BACK_TO_ITEM_EDITOR(BACK_TO_ITEM("아이템"), null, null, null, EditorState.ITEM_EDITOR, false),
+    BACK_TO_PETFOOD_EDITOR(BACK_TO_ITEM("펫 먹이"), null, null, null, EditorState.PETFOOD_EDITOR, false),
 
     // Default selection menu
     CONFIG_EDITOR(CONFIG_EDITOR(), null, null, null, EditorState.CONFIG_EDITOR, false),
@@ -73,10 +73,10 @@ public enum EditorItems {
 
     // Pet editor
     PET_EDITOR_EDIT_PET(UNKNOWN(), null, null, EditorExpectationType.PET, null, false),
-    PET_EDITOR_CREATE_NEW(CREATE_NEW_ITEM("pet", Material.MAGMA_CUBE_SPAWN_EGG), null, null, EditorExpectationType.PET_CREATE, null, false),
+    PET_EDITOR_CREATE_NEW(CREATE_NEW_ITEM("펫", Material.MAGMA_CUBE_SPAWN_EGG), null, null, EditorExpectationType.PET_CREATE, null, false),
     PAGE_SELECTOR(PAGE_SELECTOR(), null, null, EditorExpectationType.PAGE_SELECTOR, null, false),
 
-    PET_EDITOR_DELETE(DELETE("pet"), null, null, EditorExpectationType.PET_DELETE, null, false),
+    PET_EDITOR_DELETE(DELETE("펫"), null, null, EditorExpectationType.PET_DELETE, null, false),
     PET_EDITOR_LEVELS(PET_EDITOR_LEVELS(), null, null, null, EditorState.PET_EDITOR_LEVELS, false),
     PET_EDITOR_SKINS(PET_EDITOR_SKINS(), null, null, null, EditorState.PET_EDITOR_SKINS, false),
 
@@ -100,8 +100,8 @@ public enum EditorItems {
     PET_EDITOR_GET_SIGNAL_STICK_FROM_MENU(PET_EDITOR_GET_SIGNAL_STICK_FROM_MENU(), "Signals.Item.GetFromMenu", null, EditorExpectationType.BOOLEAN, null, true),
     // Pet editor - Levels
     PET_EDITOR_EDIT_LEVEL(UNKNOWN(), null, null, EditorExpectationType.PET_LEVEL_EDIT, null, false),
-    PET_EDITOR_EDIT_LEVEL_DELETE(DELETE("level"), null, null, EditorExpectationType.PET_LEVEL_DELETE, null, false),
-    PET_EDITOR_LEVEL_CREATE_NEW(CREATE_NEW_ITEM("level", Material.EXPERIENCE_BOTTLE), null, null, EditorExpectationType.PET_LEVEL_CREATE, null, false),
+    PET_EDITOR_EDIT_LEVEL_DELETE(DELETE("레벨"), null, null, EditorExpectationType.PET_LEVEL_DELETE, null, false),
+    PET_EDITOR_LEVEL_CREATE_NEW(CREATE_NEW_ITEM("레벨", Material.EXPERIENCE_BOTTLE), null, null, EditorExpectationType.PET_LEVEL_CREATE, null, false),
     PET_EDITOR_EDIT_LEVEL_NAME(PET_EDITOR_LEVEL_NAME(), "Levels.%path%.Name", null, EditorExpectationType.STRING, null, false),
     PET_EDITOR_EDIT_LEVEL_EXP_THRESHOLD(PET_EDITOR_LEVEL_EXP_THRESHOLD(), "Levels.%path%.ExperienceThreshold", null, EditorExpectationType.POSITIVE_INT, null, false),
     PET_EDITOR_EDIT_LEVEL_MAX_HEALTH(PET_EDITOR_LEVEL_MAX_HEALTH(), "Levels.%path%.MaxHealth", null, EditorExpectationType.POSITIVE_INT, null, false),
@@ -120,8 +120,8 @@ public enum EditorItems {
     PET_EDITOR_EDIT_LEVEL_EVOLUTION_REMOVE_ACCESS(PET_EDITOR_LEVEL_EVOLUTION_REMOVE_ACCESS(), "Levels.%path%.Evolution.RemoveAccess", null, EditorExpectationType.BOOLEAN, null, true),
     // Pet editor - Skins
     PET_EDITOR_EDIT_SKIN(UNKNOWN(), null, null, EditorExpectationType.PET_SKIN_EDIT, null, false),
-    PET_EDITOR_EDIT_SKIN_DELETE(DELETE("skin"), null, null, EditorExpectationType.PET_SKIN_DELETE, null, false),
-    PET_EDITOR_SKIN_CREATE_NEW(CREATE_NEW_ITEM("skin", Material.LEATHER), null, null, EditorExpectationType.PET_SKIN_CREATE, null, false),
+    PET_EDITOR_EDIT_SKIN_DELETE(DELETE("스킨"), null, null, EditorExpectationType.PET_SKIN_DELETE, null, false),
+    PET_EDITOR_SKIN_CREATE_NEW(CREATE_NEW_ITEM("스킨", Material.LEATHER), null, null, EditorExpectationType.PET_SKIN_CREATE, null, false),
     PET_EDITOR_EDIT_SKIN_ICON(UNKNOWN(), "%path%.Icon.Raw", null, EditorExpectationType.ITEM, null, false),
     PET_EDITOR_EDIT_SKIN_MYTHICMOB(PET_EDITOR_SKIN_MYTHICMOB(), "%path%.MythicMob", null, EditorExpectationType.MYTHICMOB, null, false),
     PET_EDITOR_EDIT_SKIN_PERMISSION(PET_EDITOR_SKIN_PERMISSION(), "%path%.Permission", null, EditorExpectationType.STRING, null, true),
@@ -129,8 +129,8 @@ public enum EditorItems {
     // Category editor
     CATEGORY_EDITOR_EDIT_CATEGORY(UNKNOWN(), null, null, EditorExpectationType.CATEGORY_EDIT, null, false),
 
-    CATEGORY_EDITOR_CATEGORY_CREATE(CREATE_NEW_ITEM("category", Material.KNOWLEDGE_BOOK), null, null, EditorExpectationType.CATEGORY_CREATE, null, false),
-    CATEGORY_EDITOR_CATEGORY_DELETE(DELETE("category"), null, null, EditorExpectationType.CATEGORY_DELETE, null, false),
+    CATEGORY_EDITOR_CATEGORY_CREATE(CREATE_NEW_ITEM("카테고리", Material.KNOWLEDGE_BOOK), null, null, EditorExpectationType.CATEGORY_CREATE, null, false),
+    CATEGORY_EDITOR_CATEGORY_DELETE(DELETE("카테고리"), null, null, EditorExpectationType.CATEGORY_DELETE, null, false),
 
     CATEGORY_EDITOR_CATEGORY_EDIT_ID(CATEGORY_EDITOR_CATEGORY_EDIT_ID(), "Id", null, EditorExpectationType.STRING, null, false),
     CATEGORY_EDITOR_CATEGORY_EDIT_ICON(UNKNOWN(), "Icon", null, EditorExpectationType.ITEM, null, false),
@@ -143,16 +143,16 @@ public enum EditorItems {
 
     // Items editor
     ITEMS_EDIT(UNKNOWN(), "%path%", ItemsListConfig.getInstance().getFullPath(), EditorExpectationType.ITEM_EDIT, null, false),
-    ITEMS_DELETE(DELETE("item"), null, null, EditorExpectationType.ITEM_DELETE, null, false),
-    ITEMS_CREATE(CREATE_NEW_ITEM("item", Material.EMERALD), "%path%", ItemsListConfig.getInstance().getFullPath(), EditorExpectationType.ITEM_CREATE, null, false),
+    ITEMS_DELETE(DELETE("아이템"), null, null, EditorExpectationType.ITEM_DELETE, null, false),
+    ITEMS_CREATE(CREATE_NEW_ITEM("아이템", Material.EMERALD), "%path%", ItemsListConfig.getInstance().getFullPath(), EditorExpectationType.ITEM_CREATE, null, false),
     ITEMS_EDIT_ID(ITEMS_EDIT_ID(), "%path%", ItemsListConfig.getInstance().getFullPath(), EditorExpectationType.ITEM_SECTION_ID, null, false),
     ITEMS_EDIT_ITEM(UNKNOWN(), "%path%", ItemsListConfig.getInstance().getFullPath(), EditorExpectationType.ITEM, null, false),
 
     // Pet food
     PETFOOD_EDITOR_EDIT(UNKNOWN(), null, "petfoods", EditorExpectationType.PETFOOD_EDIT, null, false),
-    PETFOOD_EDITOR_EDIT_CREATE(CREATE_NEW_ITEM("pet food", Material.COOKED_CHICKEN), null, "petfoods", EditorExpectationType.PETFOOD_CREATE, null, false),
+    PETFOOD_EDITOR_EDIT_CREATE(CREATE_NEW_ITEM("펫 먹이", Material.COOKED_CHICKEN), null, "petfoods", EditorExpectationType.PETFOOD_CREATE, null, false),
 
-    PETFOOD_EDITOR_EDIT_DELETE(DELETE("pet food"), null, "petfoods", EditorExpectationType.PETFOOD_DELETE, null, false),
+    PETFOOD_EDITOR_EDIT_DELETE(DELETE("펫 먹이"), null, "petfoods", EditorExpectationType.PETFOOD_DELETE, null, false),
     PETFOOD_EDITOR_EDIT_ID(PETFOOD_EDITOR_EDIT_ID(), "%path%", "petfoods", EditorExpectationType.PETFOOD_ID, null, false),
     PETFOOD_EDITOR_EDIT_ITEM_ID(UNKNOWN(), "%path%.ItemId", "petfoods", EditorExpectationType.ITEM_ID_OR_MATERIAL, null, false),
     PETFOOD_EDITOR_EDIT_TYPE(PETFOOD_EDITOR_EDIT_TYPE(), "%path%.Type", "petfoods", EditorExpectationType.PETFOOD_TYPE, null, false),
@@ -200,7 +200,7 @@ public enum EditorItems {
         this.id = this.name().toUpperCase();
         this.item = item;
         this.inputFilePath = filePath;
-        this.filePath = "./plugins/MCPets/" + filePath + ".yml";
+        this.filePath = fr.nocsy.mcpets.data.config.AbstractConfig.getPath() + filePath + ".yml";
         this.variablePath = variablePath;
         this.variablePathPlaceholder = "";
         this.type = type;
@@ -363,12 +363,12 @@ public enum EditorItems {
                         }
                     }
                     else {
-                        newLores.add("§cempty");
+                        newLores.add("§c비어 있음");
                     }
 
                 }
                 else {
-                    String valueStr = value == null ? "§6default (not set)" : value.toString();
+                    String valueStr = value == null ? "§6기본값 (설정 안 됨)" : value.toString();
 
                     if (value == null && this.type == EditorExpectationType.BOOLEAN)
                         valueStr = "false";
@@ -389,7 +389,7 @@ public enum EditorItems {
 
         if (resetable) {
             newLores.add(" ");
-            newLores.add("§cSHIFT + click§7 to §creset§7 the value.");
+            newLores.add("§cSHIFT + 클릭§7하면 값을 §c초기화§7해요.");
         }
 
         meta.setLore(newLores);
@@ -427,7 +427,7 @@ public enum EditorItems {
     private static ItemStack UNKNOWN() {
         final ItemStack it = new ItemStack(Material.BARRIER);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§cUnknown item");
+        meta.setDisplayName("§c알 수 없는 아이템");
         it.setItemMeta(meta);
         return it;
     }
@@ -443,11 +443,11 @@ public enum EditorItems {
     private static ItemStack BACK_TO_ITEM(final String where) {
         final ItemStack it = new ItemStack(Material.PAPER);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§cBack to " + where);
+        meta.setDisplayName("§c뒤로: " + where);
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to go back to the " + where + ".");
+        lores.add("§7클릭하면 " + where + " 화면으로 돌아가요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -460,11 +460,11 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR() {
         final ItemStack it = new ItemStack(Material.MOJANG_BANNER_PATTERN);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Edit configuration");
+        meta.setDisplayName("§6설정 편집");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit the config options.");
+        lores.add("§7클릭하면 설정 항목을 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -474,11 +474,11 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR() {
         final ItemStack it = new ItemStack(Material.MAGMA_CUBE_SPAWN_EGG);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Edit pets");
+        meta.setDisplayName("§6펫 편집");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit/create pets.");
+        lores.add("§7클릭하면 펫을 편집하거나 만들어요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -488,11 +488,11 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Edit categories");
+        meta.setDisplayName("§6카테고리 편집");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit/create categories.");
+        lores.add("§7클릭하면 카테고리를 편집하거나 만들어요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -502,11 +502,11 @@ public enum EditorItems {
     private static ItemStack ITEM_EDITOR() {
         final ItemStack it = new ItemStack(Material.EMERALD);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Edit items");
+        meta.setDisplayName("§6아이템 편집");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit/add items.");
+        lores.add("§7클릭하면 아이템을 편집하거나 추가해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -516,11 +516,11 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR() {
         final ItemStack it = new ItemStack(Material.COOKED_CHICKEN);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Edit pet food");
+        meta.setDisplayName("§6펫 먹이 편집");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit/add pet food.");
+        lores.add("§7클릭하면 펫 먹이를 편집하거나 추가해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -533,13 +533,13 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_PREFIX() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Prefix");
+        meta.setDisplayName("§6접두사");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit the plugin's prefix.");
+        lores.add("§7클릭하면 플러그인 메시지 접두사를 편집해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -549,14 +549,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_DEFAULT_NAME() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Default pet name");
+        meta.setDisplayName("§6기본 펫 이름");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the name of the pet when");
-        lores.add("§7none is set.");
+        lores.add("§7이름을 정하지 않은 펫에게");
+        lores.add("§7붙는 이름이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -566,14 +566,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_USE_DEFAULT_MYTHICMOBS_NAMES() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Use default MythicMobs name");
+        meta.setDisplayName("§6MythicMobs 이름 사용");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the MythicMobs name should");
-        lores.add("§7show up as the default name.");
+        lores.add("§7MythicMobs에 정한 이름을");
+        lores.add("§7기본 이름으로 보여 줄지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -583,14 +583,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_OVERRIDE_DEFAULT_NAME() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Override default name");
+        meta.setDisplayName("§6기본 이름 덮어쓰기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether renaming the pet should override");
-        lores.add("§7the default name when it's empty.");
+        lores.add("§7이름을 비워 두었을 때 펫 이름 변경이");
+        lores.add("§7기본 이름을 덮어쓸지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -600,13 +600,13 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_RIGHT_CLICK_TO_OPEN_MENU() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Right click to open menu");
+        meta.setDisplayName("§6우클릭으로 메뉴 열기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the menu should open on right click.");
+        lores.add("§7펫을 우클릭하면 메뉴를 열지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -616,13 +616,13 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_LEFT_CLICK_TO_OPEN_MENU() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Left click to open menu");
+        meta.setDisplayName("§6좌클릭으로 메뉴 열기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the menu should open on left click.");
+        lores.add("§7펫을 좌클릭하면 메뉴를 열지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -632,14 +632,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_SNEAKMODE() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Sneak mode to open menu");
+        meta.setDisplayName("§6웅크려야 메뉴 열기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether sneaking is required");
-        lores.add("§7to open the menu when interacting.");
+        lores.add("§7펫과 상호작용해 메뉴를 열 때");
+        lores.add("§7웅크리기가 필요한지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -649,13 +649,13 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_NAMEABLE() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Nameable");
+        meta.setDisplayName("§6이름 짓기 허용");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether all pets can have custom names.");
+        lores.add("§7모든 펫에 이름을 붙일 수 있는지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -665,15 +665,15 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_MOUNTABLE() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Override default name");
+        meta.setDisplayName("§6기본 이름 덮어쓰기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether all pets should be mountable");
-        lores.add("§7by default, if the feature is enabled");
-        lores.add("§7and parameterized for the pet.");
+        lores.add("§7기능이 켜져 있고 펫에 설정돼 있을 때");
+        lores.add("§7모든 펫을 기본으로 탈 수 있게");
+        lores.add("§7할지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -683,14 +683,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_DISTANCE_TELEPORT() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Distance before teleport");
+        meta.setDisplayName("§6순간이동 거리");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the minimum distance before the");
-        lores.add("§7pet is teleported back to its owner.");
+        lores.add("§7주인과 이 거리보다 멀어지면");
+        lores.add("§7펫이 주인 곁으로 순간이동해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -700,14 +700,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_MAX_NAME_LENGTH() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Max name length");
+        meta.setDisplayName("§6이름 최대 길이");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the maximum length of a");
-        lores.add("§7custom pet name.");
+        lores.add("§7펫 이름에 쓸 수 있는");
+        lores.add("§7최대 글자 수예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -717,14 +717,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_INVENTORY_SIZE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Summoning Inventory size");
+        meta.setDisplayName("§6소환 메뉴 크기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the size of the inventory to a given");
-        lores.add("§7value, or -1 for adaptive inventory.");
+        lores.add("§7소환 메뉴 칸 수를 정해요.");
+        lores.add("§7-1이면 펫 수에 맞춰 자동으로 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -734,14 +734,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_ENABLE_CLICK_BACK_TO_MENU() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Enable click back to menu (category)");
+        meta.setDisplayName("§6바깥 클릭으로 카테고리 돌아가기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether clicking outside a category menu");
-        lores.add("§7should open back the category selection.");
+        lores.add("§7카테고리 메뉴 바깥을 클릭하면");
+        lores.add("§7카테고리 선택으로 돌아갈지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -751,14 +751,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_ACTIVATE_BACK_MENU_ICON() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Activate back menu icon");
+        meta.setDisplayName("§6메뉴로 돌아가기 아이콘");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the \"back to menu\" icon should");
-        lores.add("§7show up in the interaction menu.");
+        lores.add("§7상호작용 메뉴에 \"메뉴로 돌아가기\"");
+        lores.add("§7아이콘을 보여 줄지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -768,14 +768,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_DISMOUNT_ON_DAMAGED() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Dismount on damaged");
+        meta.setDisplayName("§6피해를 입으면 내리기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the player should be dismounted");
-        lores.add("§7when taking damages.");
+        lores.add("§7탄 상태에서 피해를 입으면");
+        lores.add("§7펫에서 내릴지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -785,14 +785,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_PERCENT_HEALTH_ON_RESPAWN() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Percent health on respawn");
+        meta.setDisplayName("§6부활 시 체력 비율");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Percentage of health restored to the pet");
-        lores.add("§7restored after dying (living pet).");
+        lores.add("§7쓰러진 펫이 부활할 때 회복하는");
+        lores.add("§7체력 비율이에요 (성장형 펫).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -802,14 +802,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_AUTO_SAVE_DELAY() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Auto-save database delay");
+        meta.setDisplayName("§6DB 자동 저장 주기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7How long before the database should save");
-        lores.add("§7on a regular basis.");
+        lores.add("§7데이터베이스를 주기적으로 저장하는");
+        lores.add("§7간격이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -819,14 +819,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_DEFAULT_RESPAWN_COOLDOWN() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Default respawn cooldown");
+        meta.setDisplayName("§6기본 부활 대기 시간");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7How long before the pet should be revived");
-        lores.add("§7by default (living pet).");
+        lores.add("§7쓰러진 펫이 다시 살아나기까지의");
+        lores.add("§7기본 대기 시간이에요 (성장형 펫).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -836,14 +836,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_GLOBAL_RESPAWN_COOLDOWN() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Global respawn cooldown");
+        meta.setDisplayName("§6공통 부활 대기 시간");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the player can not summon ANY pet");
-        lores.add("§7while being on cooldown.");
+        lores.add("§7대기 시간 동안 다른 펫도 전부");
+        lores.add("§7소환할 수 없게 할지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -853,14 +853,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_GLOBAL_AUTORESPAWN() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Autorespawn");
+        meta.setDisplayName("§6자동 부활");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether when a pet dies, it is respawned");
-        lores.add("§7automatically at the player's side after reborn.");
+        lores.add("§7펫이 쓰러지면 대기 시간이 끝난 뒤");
+        lores.add("§7자동으로 주인 곁에 다시 소환할지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -870,14 +870,14 @@ public enum EditorItems {
     private static ItemStack CONFIG_EDITOR_DISABLE_INVENTORY_WHILE_SIGNAL_STICK() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Disable inventory while signal stick");
+        meta.setDisplayName("§6명령 막대 들고 있을 때 가방 막기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the inventory should be accessible while");
-        lores.add("§7clicking the pet with a signal stick.");
+        lores.add("§7명령 막대로 펫을 클릭할 때");
+        lores.add("§7펫 가방을 열 수 있는지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -902,7 +902,7 @@ public enum EditorItems {
 
         final ArrayList<String> lores = (ArrayList<String>) og_lores;
         lores.add(" ");
-        lores.add("§eClick to edit that pet.");
+        lores.add("§e클릭하면 이 펫을 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -924,13 +924,13 @@ public enum EditorItems {
         if (og_lores == null)
             og_lores = new ArrayList<>();
 
-        if (og_lores.contains("§eClick with an item on that icon"))
+        if (og_lores.contains("§e아이템을 들고 이 아이콘을 클릭하면"))
             return this;
 
         final ArrayList<String> lores = (ArrayList<String>) og_lores;
         lores.add(" ");
-        lores.add("§eClick with an item on that icon");
-        lores.add("§eto replace the pet icon.");
+        lores.add("§e아이템을 들고 이 아이콘을 클릭하면");
+        lores.add("§e펫 아이콘을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -947,8 +947,8 @@ public enum EditorItems {
             it = (ItemStack) ((ItemStack) value).clone();
         }
         final ItemMeta meta = it.getItemMeta();
-        if (meta.getDisplayName().equals("§cUndefined"))
-            meta.setDisplayName("§6Signal stick");
+        if (meta.getDisplayName().equals("§c정해지지 않음"))
+            meta.setDisplayName("§6명령 막대");
 
         List<String> og_lores = it.getItemMeta().getLore();
         if (og_lores == null)
@@ -956,8 +956,8 @@ public enum EditorItems {
 
         final ArrayList<String> lores = (ArrayList<String>) og_lores;
         lores.add(" ");
-        lores.add("§eClick with an item on that icon");
-        lores.add("§eto replace the signal stick.");
+        lores.add("§e아이템을 들고 이 아이콘을 클릭하면");
+        lores.add("§e명령 막대 아이템을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -970,12 +970,12 @@ public enum EditorItems {
     private static ItemStack PAGE_SELECTOR() {
         final ItemStack it = new ItemStack(Material.ARROW);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§aPage selector");
+        meta.setDisplayName("§a페이지 이동");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§cLeft§7 click to go on the previous page");
-        lores.add("§aRight§7 click to go on the next page");
+        lores.add("§c좌클릭§7: 이전 페이지");
+        lores.add("§a우클릭§7: 다음 페이지");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -985,11 +985,11 @@ public enum EditorItems {
     private static ItemStack CREATE_NEW_ITEM(final String what, final Material type) {
         final ItemStack it = new ItemStack(type);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§aCreate a new " + what);
+        meta.setDisplayName("§a새 " + what + " 만들기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to create a new " + what + ".");
+        lores.add("§7클릭하면 새 " + what + "을(를) 만들어요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -999,13 +999,13 @@ public enum EditorItems {
     private static ItemStack DELETE(final String what) {
         final ItemStack it = new ItemStack(Material.BARRIER);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§cDelete the " + what);
+        meta.setDisplayName("§c" + what + " 삭제");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§cSHIFT§7 + Click to delete the " + what + ".");
+        lores.add("§cSHIFT§7 + 클릭하면 " + what + "을(를) 삭제해요.");
         lores.add(" ");
-        lores.add("§c§lWARNING: this is permanent.");
+        lores.add("§c§l주의: 되돌릴 수 없어요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1019,9 +1019,9 @@ public enum EditorItems {
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the MythicMob that handles the pet.");
+        lores.add("§7펫으로 쓸 MythicMob을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1031,14 +1031,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_PERMISSION() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Permission");
+        meta.setDisplayName("§6권한");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the permission that enables");
-        lores.add("§7to unlock the pet.");
+        lores.add("§7이 펫을 쓸 수 있게 해 주는");
+        lores.add("§7권한을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1048,15 +1048,15 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_MOUNTABLE() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Mountable");
+        meta.setDisplayName("§6탈 수 있음");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether or not the pet is mountable.");
-        lores.add("§7This requires the pet to have a \"mount\" bone");
-        lores.add("§7within the Blockbench file (check wiki).");
+        lores.add("§7펫을 탈 수 있는지 정해요.");
+        lores.add("§7Blockbench 모델에 \"mount\" 본이");
+        lores.add("§7있어야 해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1066,14 +1066,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_MOUNT_TYPE() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Mount type");
+        meta.setDisplayName("§6탈것 종류");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the mount type of the pet.");
-        lores.add("§7Only active if the pet is mountable.");
+        lores.add("§7펫을 탈 때의 이동 방식을 정해요.");
+        lores.add("§7탈 수 있는 펫에만 적용돼요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1083,14 +1083,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_DESPAWN_ON_DISMOUNT() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Despawn on Dismount");
+        meta.setDisplayName("§6내리면 사라지기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the player should be dismounted");
-        lores.add("§7of the pet when it is despawned.");
+        lores.add("§7플레이어가 펫에서 내리면");
+        lores.add("§7펫을 회수할지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1100,14 +1100,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_AUTORIDE() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Auto-ride");
+        meta.setDisplayName("§6자동 탑승");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the player should automatically");
-        lores.add("§7ride its pet when it's spawned.");
+        lores.add("§7펫을 소환하면 플레이어가");
+        lores.add("§7자동으로 올라탈지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1117,14 +1117,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_MOUNT_PERMISSION() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Mount permission");
+        meta.setDisplayName("§6탑승 권한");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a permission to allow the player");
-        lores.add("§7to ride the mount (if mounting enabled)");
+        lores.add("§7탑승이 켜져 있을 때 펫에 올라탈 수");
+        lores.add("§7있게 해 주는 권한을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1134,13 +1134,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_DESPAWN_SKILL() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Despawn skill");
+        meta.setDisplayName("§6회수 스킬");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set an optional despawn skill.");
+        lores.add("§7펫이 사라질 때 쓸 스킬을 정해요 (선택).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1150,14 +1150,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_DISTANCE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Come back distance");
+        meta.setDisplayName("§6돌아오는 거리");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the minimum distance before the pet");
-        lores.add("§7comes back to the owner.");
+        lores.add("§7주인과 이 거리보다 멀어지면");
+        lores.add("§7펫이 주인에게 돌아와요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1167,14 +1167,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SPAWN_RANGE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Spawn range");
+        meta.setDisplayName("§6소환 범위");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the radius in which the pet is");
-        lores.add("§7potentially being spawned into.");
+        lores.add("§7펫이 소환될 수 있는");
+        lores.add("§7반경이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1184,14 +1184,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_COMING_BACK_RANGE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Close up come back distance");
+        meta.setDisplayName("§6멈추는 거리");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set distance at which the pets stands");
-        lores.add("§7once it is close enough to the owner");
+        lores.add("§7주인에게 충분히 가까워졌을 때");
+        lores.add("§7펫이 멈춰 서는 거리예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1201,13 +1201,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_INVENTORY_SIZE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Inventory size");
+        meta.setDisplayName("§6가방 크기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a size for the pet inventory.");
+        lores.add("§7펫 가방의 칸 수를 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1217,14 +1217,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_TAMING_PROGRESS_SKILL() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Taming - Progress skill");
+        meta.setDisplayName("§6길들이기 - 진행 스킬");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a skill for when a player");
-        lores.add("§7tames the pet.");
+        lores.add("§7플레이어가 펫을 길들이는");
+        lores.add("§7동안 쓸 스킬을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1234,14 +1234,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_TAMING_FINISHED_SKILL() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Taming - Finished skill");
+        meta.setDisplayName("§6길들이기 - 완료 스킬");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a skill for when a player");
-        lores.add("§7has finished taming the pet.");
+        lores.add("§7플레이어가 펫을 길들이는");
+        lores.add("§7길들이기를 마쳤을 때 쓸 스킬이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1255,10 +1255,10 @@ public enum EditorItems {
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the icon that represents the pet.");
+        lores.add("§7펫을 나타내는 아이콘을 정해요.");
         lores.add(" ");
-        lores.add("§7Click it with an item from your inventory");
-        lores.add("§7to modify the current item.");
+        lores.add("§7인벤토리의 아이템을 들고 클릭하면");
+        lores.add("§7지금 아이템을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1268,14 +1268,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SIGNALS() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Signals");
+        meta.setDisplayName("§6명령 목록");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the list of signals that");
-        lores.add("§7can be casted using the signal stick.");
+        lores.add("§7명령 막대로 내릴 수 있는");
+        lores.add("§7명령 목록을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1285,14 +1285,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SIGNAL_STICK() {
         final ItemStack it = new ItemStack(Material.BLAZE_ROD);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Signal stick");
+        meta.setDisplayName("§6명령 막대");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the signal stick item.");
+        lores.add("§7명령 막대 아이템을 정해요.");
         lores.add(" ");
-        lores.add("§7Click it with an item from your inventory");
-        lores.add("§7to modify the current item.");
+        lores.add("§7인벤토리의 아이템을 들고 클릭하면");
+        lores.add("§7지금 아이템을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1302,14 +1302,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_GET_SIGNAL_STICK_FROM_MENU() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Signal stick from menu");
+        meta.setDisplayName("§6메뉴에서 명령 막대 받기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the signal stick is accessible");
-        lores.add("§7in the interaction menu directly.");
+        lores.add("§7상호작용 메뉴에서 명령 막대를");
+        lores.add("§7바로 받을 수 있는지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1319,11 +1319,11 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SKINS() {
         final ItemStack it = new ItemStack(Material.LEATHER);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Skins");
+        meta.setDisplayName("§6스킨");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Add/Delete skins for that pet.");
+        lores.add("§7이 펫의 스킨을 추가하거나 삭제해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1333,11 +1333,11 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVELS() {
         final ItemStack it = new ItemStack(Material.EXPERIENCE_BOTTLE);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Living pet features");
+        meta.setDisplayName("§6성장형 펫 기능");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Add/Edit living pet features.");
+        lores.add("§7성장형 펫 기능을 추가하거나 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1357,9 +1357,9 @@ public enum EditorItems {
         meta.setDisplayName("§a" + level.getLevelName());
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Experience threshold: §a" + level.getExpThreshold());
+        lores.add("§7필요 경험치: §a" + level.getExpThreshold());
         lores.add(" ");
-        lores.add("§eClick to edit that level.");
+        lores.add("§e클릭하면 이 레벨을 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1374,13 +1374,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_NAME() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Level name");
+        meta.setDisplayName("§6레벨 이름");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the display name of the level.");
+        lores.add("§7레벨에 보여 줄 이름을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1390,15 +1390,15 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_EXP_THRESHOLD() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Experience threshold");
+        meta.setDisplayName("§6필요 경험치");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the minimum experience value");
-        lores.add("§7for the pet to access that level.");
-        lores.add("§cNote that the first level starts at 0 XP");
+        lores.add("§7펫이 이 레벨이 되는 데");
+        lores.add("§7필요한 최소 경험치예요.");
+        lores.add("§c첫 레벨은 0 XP에서 시작해야 해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1408,13 +1408,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_MAX_HEALTH() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Maximum health");
+        meta.setDisplayName("§6최대 체력");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the pet's health.");
+        lores.add("§7펫의 최대 체력을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1424,14 +1424,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_REGENERATION() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Regeneration");
+        meta.setDisplayName("§6체력 회복");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the regeneration of health");
-        lores.add("§7over time. §c(health/second)");
+        lores.add("§7시간에 따라 회복하는");
+        lores.add("§7체력이에요. §c(체력/초)");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1441,14 +1441,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_RESISTANCE_MODIFIER() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Resistance modifier");
+        meta.setDisplayName("§6저항 배율");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the by how much the damage received");
-        lores.add("§7are divided by.");
+        lores.add("§7받는 피해를 이 값으로");
+        lores.add("§7나눠요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1458,16 +1458,16 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_DAMAGE_MODIFIER() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Damage modifier");
+        meta.setDisplayName("§6피해 배율");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set by how much the damage done by");
-        lores.add("§7the pet can be multiplicated by.");
-        lores.add("§cThis is not automatic and should be used");
-        lores.add("§cas a placeholder in MythicMobs (see wiki)");
+        lores.add("§7펫이 주는 피해에");
+        lores.add("§7곱하는 값이에요.");
+        lores.add("§c자동으로 적용되지 않아요. MythicMobs에서");
+        lores.add("§c플레이스홀더로 써야 해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1477,16 +1477,16 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_POWER() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Power modifier");
+        meta.setDisplayName("§6위력 배율");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set by how much the spell power done of");
-        lores.add("§7the pet can be multiplicated by.");
-        lores.add("§cThis is not automatic and should be used");
-        lores.add("§cas a placeholder in MythicMobs (see wiki)");
+        lores.add("§7펫 스킬 위력에");
+        lores.add("§7곱하는 값이에요.");
+        lores.add("§c자동으로 적용되지 않아요. MythicMobs에서");
+        lores.add("§c플레이스홀더로 써야 해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1496,14 +1496,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_COOLDOWN_RESPAWN() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Cooldown - Respawn");
+        meta.setDisplayName("§6대기 시간 - 부활");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set how long before the pet can");
-        lores.add("§7be respawned after dying.");
+        lores.add("§7펫을 다시 소환할 수 있기까지의");
+        lores.add("§7시간이에요 (쓰러진 뒤).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1513,14 +1513,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_COOLDOWN_REVOKE() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Cooldown - Revoke");
+        meta.setDisplayName("§6대기 시간 - 회수");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set how long before the pet can");
-        lores.add("§7be respawned after being revoked.");
+        lores.add("§7펫을 다시 소환할 수 있기까지의");
+        lores.add("§7시간이에요 (회수한 뒤).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1530,14 +1530,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_INVENTORY_EXTENSION() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Inventory extension");
+        meta.setDisplayName("§6가방 확장");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set how many more slots are unlocked");
-        lores.add("§7in the pet inventory at that level.");
+        lores.add("§7이 레벨에서 펫 가방에");
+        lores.add("§7추가로 열리는 칸 수예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1547,14 +1547,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_ANNOUNCEMENT_TEXT() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Announcement - Text");
+        meta.setDisplayName("§6알림 - 문구");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a text to be announced when");
-        lores.add("§7the pet evolves.");
+        lores.add("§7펫이 성장했을 때");
+        lores.add("§7보여 줄 문구예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1564,13 +1564,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_ANNOUNCEMENT_TYPE() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Announcement - Type");
+        meta.setDisplayName("§6알림 - 방식");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the announcement type.");
+        lores.add("§7알림을 보여 줄 방식을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1580,14 +1580,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_ANNOUNCEMENT_SKILL() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Announcement - Skill");
+        meta.setDisplayName("§6알림 - 스킬");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the skill casted when");
-        lores.add("§7the pet evolves.");
+        lores.add("§7펫이 성장했을 때");
+        lores.add("§7보여 줄 문구예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1597,13 +1597,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_EVOLUTION_PET_ID() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Evolution - Pet ID");
+        meta.setDisplayName("§6진화 - 펫 ID");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the pet ID of the evolution.");
+        lores.add("§7진화하면 바뀔 펫의 ID예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1613,14 +1613,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_EVOLUTION_DELAY() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Evolution - Delay");
+        meta.setDisplayName("§6진화 - 지연");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a delay before the evolution");
-        lores.add("§7is triggered (like the skill duration, in ticks).");
+        lores.add("§7진화가 일어나기 전 기다리는");
+        lores.add("§7시간이에요 (스킬 길이 등, 틱 단위).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1630,14 +1630,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_LEVEL_EVOLUTION_REMOVE_ACCESS() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Evolution - Remove old access");
+        meta.setDisplayName("§6진화 - 이전 펫 권한 제거");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Whether the previous pet permission should");
-        lores.add("§7be removed when evolving (recommended to true)");
+        lores.add("§7진화할 때 이전 펫 권한을");
+        lores.add("§7없앨지 정해요 (켜 두기를 권장해요).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1658,10 +1658,10 @@ public enum EditorItems {
 
         final ItemMeta meta = it.getItemMeta();
 
-        meta.setDisplayName("§6Skin: §e" + skin.getMythicMobId());
+        meta.setDisplayName("§6스킨: §e" + skin.getMythicMobId());
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§eClick to edit that skin.");
+        lores.add("§e클릭하면 이 스킨을 편집해요.");
 
         meta.setLore(lores);
 
@@ -1685,11 +1685,11 @@ public enum EditorItems {
 
         final ItemMeta meta = it.getItemMeta();
 
-        meta.setDisplayName("§6Skin: §e" + skin.getMythicMobId());
+        meta.setDisplayName("§6스킨: §e" + skin.getMythicMobId());
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§eClick with an item to edit");
-        lores.add("§ethe icon of the skin.");
+        lores.add("§e아이템을 들고 클릭하면");
+        lores.add("§e스킨 아이콘을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1704,13 +1704,13 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SKIN_MYTHICMOB() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Skin - MythicMob");
+        meta.setDisplayName("§6스킨 - MythicMob");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the mythicmob to swap to as a skin");
+        lores.add("§7스킨으로 바꿔 쓸 MythicMob을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1720,14 +1720,14 @@ public enum EditorItems {
     private static ItemStack PET_EDITOR_SKIN_PERMISSION() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Skin - Permission");
+        meta.setDisplayName("§6스킨 - 권한");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the permission to");
-        lores.add("§7unlock the skin.");
+        lores.add("§7이 스킨을 쓸 수 있게");
+        lores.add("§7해 주는 권한이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1746,10 +1746,10 @@ public enum EditorItems {
 
         final ItemMeta meta = it.getItemMeta();
 
-        meta.setDisplayName("§6Category: §e" + category.getIconName());
+        meta.setDisplayName("§6카테고리: §e" + category.getIconName());
         final ArrayList<String> lores = new ArrayList<>();
 
-        lores.add("§eClick to edit the category.");
+        lores.add("§e클릭하면 이 카테고리를 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1770,32 +1770,32 @@ public enum EditorItems {
 
         final ItemMeta meta = it.getItemMeta();
 
-        meta.setDisplayName("§6Category: §e" + category.getIconName());
+        meta.setDisplayName("§6카테고리: §e" + category.getIconName());
         final ArrayList<String> lores = new ArrayList<>();
 
-        lores.add("§aExcluded categories:");
+        lores.add("§a제외한 카테고리:");
         if (category.getExcludedCategoriesId().size() == 0)
-            lores.add("§7- §6None");
+            lores.add("§7- §6없음");
         for(final String excludedCategoryId : category.getExcludedCategoriesId())
             lores.add("§7- " + excludedCategoryId);
 
         lores.add(" ");
 
         if (category.isDefaultCategory()) {
-            lores.add("§aIncludes all pets §7(default category)");
+            lores.add("§a모든 펫 포함 §7(기본 카테고리)");
         }
         else {
-            lores.add("§aIncluded Pets:");
+            lores.add("§a포함된 펫:");
             if (category.getPets().size() == 0)
-                lores.add("§7- §6None");
+                lores.add("§7- §6없음");
             for(final Pet pet : category.getPets())
                 lores.add(" §7 - " + pet.getId());
         }
 
         lores.add(" ");
 
-        lores.add("§eClick with an item to edit");
-        lores.add("§ethe icon of the category.");
+        lores.add("§e아이템을 들고 클릭하면");
+        lores.add("§e카테고리 아이콘을 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1810,13 +1810,13 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_ID() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Category ID");
+        meta.setDisplayName("§6카테고리 ID");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Click to edit the category ID.");
+        lores.add("§7클릭하면 카테고리 ID를 편집해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1826,14 +1826,14 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_DEFAULT_CATEGORY() {
         final ItemStack it = new ItemStack(Material.KNOWLEDGE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Default category");
+        meta.setDisplayName("§6기본 카테고리");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7(Optional) Should all the pet go");
-        lores.add("§7into that category by default ?");
+        lores.add("§7(선택) 모든 펫을 기본으로");
+        lores.add("§7이 카테고리에 넣을지 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1844,14 +1844,14 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_EXCLUDED_CATEGORIES() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Excluded categories");
+        meta.setDisplayName("§6제외할 카테고리");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§a(Optional)§7 Exclude all the pets");
-        lores.add("§7from the specified categories.");
+        lores.add("§a(선택)§7 지정한 카테고리의 펫을");
+        lores.add("§7모두 빼요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1861,11 +1861,11 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_PET_ADD() {
         final ItemStack it = new ItemStack(Material.GOLD_INGOT);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§aAdd§6 a pets");
+        meta.setDisplayName("§a펫 §6추가");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Add a pet to the category.");
+        lores.add("§7카테고리에 펫을 넣어요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1875,11 +1875,11 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_PET_REMOVE() {
         final ItemStack it = new ItemStack(Material.NETHER_BRICK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§cRemove§6 a pet");
+        meta.setDisplayName("§c펫 §6빼기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Remove a pet from the category.");
+        lores.add("§7카테고리에서 펫을 빼요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1889,14 +1889,14 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_TITLE_NAME() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Category Inventory title");
+        meta.setDisplayName("§6카테고리 메뉴 제목");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the title of the category");
-        lores.add("§7inventory in the GUI.");
+        lores.add("§7카테고리 메뉴 창에");
+        lores.add("§7보일 제목이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1906,14 +1906,14 @@ public enum EditorItems {
     private static ItemStack CATEGORY_EDITOR_CATEGORY_EDIT_ICON_NAME() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Category icon name");
+        meta.setDisplayName("§6카테고리 아이콘 이름");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the name of the icon");
-        lores.add("§7for the category in the GUI.");
+        lores.add("§7메뉴에서 카테고리 아이콘에");
+        lores.add("§7보일 이름이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1934,9 +1934,9 @@ public enum EditorItems {
         final ArrayList<String> lores = new ArrayList<>();
 
         lores.add(" ");
-        lores.add("§aId: §b" + itemId);
+        lores.add("§aID: §b" + itemId);
         lores.add(" ");
-        lores.add("§eClick to edit that item.");
+        lores.add("§e클릭하면 이 아이템을 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1963,7 +1963,7 @@ public enum EditorItems {
         }
 
         lores.add(" ");
-        lores.add("§eClick with an item to change it.");
+        lores.add("§e아이템을 들고 클릭하면 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -1978,13 +1978,13 @@ public enum EditorItems {
     private static ItemStack ITEMS_EDIT_ID() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Item ID");
+        meta.setDisplayName("§6아이템 ID");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Edit the ID of the item.");
+        lores.add("§7아이템 ID를 편집해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2005,9 +2005,9 @@ public enum EditorItems {
         final ArrayList<String> lores = new ArrayList<>();
 
         lores.add(" ");
-        lores.add("§aId: §b" + petFood.getId());
+        lores.add("§aID: §b" + petFood.getId());
         lores.add(" ");
-        lores.add("§eClick to edit that petfood.");
+        lores.add("§e클릭하면 이 펫 먹이를 편집해요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2034,7 +2034,7 @@ public enum EditorItems {
         }
 
         lores.add(" ");
-        lores.add("§eClick with an item to change it.");
+        lores.add("§e아이템을 들고 클릭하면 바꿔요.");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2049,13 +2049,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_ID() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Petfood ID");
+        meta.setDisplayName("§6펫 먹이 ID");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Edit the ID of the petfood.");
+        lores.add("§7펫 먹이 ID를 편집해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2068,15 +2068,15 @@ public enum EditorItems {
         if (petFood.getItemStack() != null)
             it = petFood.getItemStack().clone();
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Food item");
+        meta.setDisplayName("§6먹이 아이템");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the food item.");
-        lores.add("§7It can be either a registered §apet item§7");
-        lores.add("§7for more customization, or any §bMATERIAL§7.");
+        lores.add("§7먹이로 쓸 아이템을 정해요.");
+        lores.add("§7등록한 §a펫 아이템§7이나");
+        lores.add("§7아무 §bMATERIAL§7이나 쓸 수 있어요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2088,13 +2088,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_TYPE() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Pet food type");
+        meta.setDisplayName("§6먹이 종류");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the pet food type (see wiki).");
+        lores.add("§7펫 먹이의 종류를 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2104,13 +2104,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_POWER() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Power value");
+        meta.setDisplayName("§6위력 값");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the power of the pet food.");
+        lores.add("§7펫 먹이의 효과 크기예요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2120,14 +2120,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_DURATION() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Duration of the buff");
+        meta.setDisplayName("§6버프 지속 시간");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7If the pet food is a buff,");
-        lores.add("§7sets the duration (in ticks) of the effect.");
+        lores.add("§7버프 먹이라면 효과가");
+        lores.add("§7유지되는 시간이에요 (틱 단위).");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2137,14 +2137,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_OPERATOR() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Operator");
+        meta.setDisplayName("§6연산 방식");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the mathematical operation");
-        lores.add("§7to be perfomed on the power of the food. (wiki)");
+        lores.add("§7먹이 위력을 적용할");
+        lores.add("§7계산 방식을 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2154,14 +2154,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_SIGNAL() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Signal");
+        meta.setDisplayName("§6명령");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set the signal triggered when giving");
-        lores.add("§7the pet food to the pet.");
+        lores.add("§7펫에게 먹이를 줄 때");
+        lores.add("§7실행할 명령이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2171,13 +2171,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_PETS_ADD() {
         final ItemStack it = new ItemStack(Material.GOLD_INGOT);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§aAdd§6 pet");
+        meta.setDisplayName("§a펫 §6추가");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§aAdd§7 a compatible pet. §a(Optional)");
+        lores.add("§7먹을 수 있는 펫을 §a추가§7해요. §a(선택)");
         lores.add(" ");
-        lores.add("§7Currently restricted pets: §e%value%");
+        lores.add("§7지금 먹을 수 있는 펫: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2187,13 +2187,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_PETS_REMOVE() {
         final ItemStack it = new ItemStack(Material.NETHER_BRICK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§cRemove§6 pet");
+        meta.setDisplayName("§c펫 §6빼기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§cRemove§7 a compatible pet. §a(Optional)");
+        lores.add("§7먹을 수 있는 펫에서 §c빼요§7. §a(선택)");
         lores.add(" ");
-        lores.add("§7Currently restricted pets: §e%value%");
+        lores.add("§7지금 먹을 수 있는 펫: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2203,14 +2203,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_EVOLUTION() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Evolution");
+        meta.setDisplayName("§6진화");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§a(Optional)§7 Set the evolution triggered");
-        lores.add("§7when the pet eats the food.");
+        lores.add("§a(선택)§7 펫이 먹이를 먹으면");
+        lores.add("§7일어날 진화를 정해요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2220,14 +2220,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_EXP_THRESHOLD() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Experience threshold");
+        meta.setDisplayName("§6필요 경험치");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Set a value of experience after which");
-        lores.add("§7the food can be consumed by the pet.");
+        lores.add("§7펫이 이 경험치를 넘으면");
+        lores.add("§7먹이를 먹을 수 있어요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2237,14 +2237,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_DELAY() {
         final ItemStack it = new ItemStack(Material.ENCHANTED_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Delay before evolution");
+        meta.setDisplayName("§6진화 전 대기");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7If you're using an evolution food, how long");
-        lores.add("§7before the evolution should be triggered.");
+        lores.add("§7진화 먹이라면 진화가 일어나기까지");
+        lores.add("§7기다리는 시간이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2254,13 +2254,13 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_PERMISSION() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Permission");
+        meta.setDisplayName("§6권한");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7Necessary permission to use the pet food.");
+        lores.add("§7펫 먹이를 쓰는 데 필요한 권한이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);
@@ -2270,14 +2270,14 @@ public enum EditorItems {
     private static ItemStack PETFOOD_EDITOR_EDIT_UNLOCKED_PET() {
         final ItemStack it = new ItemStack(Material.WRITABLE_BOOK);
         final ItemMeta meta = it.getItemMeta();
-        meta.setDisplayName("§6Unlocked pet");
+        meta.setDisplayName("§6해금할 펫");
 
         final ArrayList<String> lores = new ArrayList<>();
         lores.add(" ");
-        lores.add("§7If the food type is §aUNLOCK§7,");
-        lores.add("§7which pet should be unlocked.");
+        lores.add("§7먹이 종류가 §aUNLOCK§7이면");
+        lores.add("§7해금할 펫이에요.");
         lores.add(" ");
-        lores.add("§7Current value: §e%value%");
+        lores.add("§7현재 값: §e%value%");
 
         meta.setLore(lores);
         it.setItemMeta(meta);

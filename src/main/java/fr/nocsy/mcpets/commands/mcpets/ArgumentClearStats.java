@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 public class ArgumentClearStats extends AArgument {
 
     public ArgumentClearStats(CommandSender sender, String[] args) {
-        super("clearStats", new int[]{3, 2}, sender, args, "/mcpets clearStats <player|petId> [petId]");
+        super("clearStats", new int[]{3, 2}, sender, args, "/펫 통계초기화 <플레이어|펫ID> [펫ID]");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ArgumentClearStats extends AArgument {
                 }
 
                 // In that case it's not a pet clear so he probably failed to give a player name
-                sender.sendMessage(Language.PLAYER_OR_PET_DOESNT_EXIST.getComponent());
+                fr.nocsy.mcpets.utils.Chat.send(sender, Language.PLAYER_OR_PET_DOESNT_EXIST.getComponent());
             }
         }
         else if (args.length == 3) {
@@ -68,7 +68,7 @@ public class ArgumentClearStats extends AArgument {
                 }
             }
 
-            sender.sendMessage(Language.PLAYER_OR_PET_DOESNT_EXIST.getComponent());
+            fr.nocsy.mcpets.utils.Chat.send(sender, Language.PLAYER_OR_PET_DOESNT_EXIST.getComponent());
         }
     }
 }

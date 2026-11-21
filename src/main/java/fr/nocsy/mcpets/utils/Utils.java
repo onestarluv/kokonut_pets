@@ -298,7 +298,7 @@ public class Utils {
      */
     public static void debug(final String msg) {
         final Player p = Bukkit.getPlayer("Nocsy");
-        if (p != null) p.sendMessage(msg);
+        if (p != null) fr.nocsy.mcpets.utils.Chat.send(p, msg);
         MCPets.getLog().severe("[DEBUG]: " + msg);
     }
 

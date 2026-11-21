@@ -93,20 +93,6 @@ public class GlobalConfig extends AbstractConfig {
     private String tamingColorLeft;
 
     @Getter
-    private boolean disableMySQL;
-    @Getter
-    private String MySQL_Prefix;
-    @Getter
-    private String MySQL_USER;
-    @Getter
-    private String MySQL_PASSWORD;
-    @Getter
-    private String MySQL_HOST;
-    @Getter
-    private String MySQL_PORT;
-    @Getter
-    private String MySQL_DB;
-    @Getter
     private List<String> blackListedWorlds;
     @Getter
     private boolean fastMount;
@@ -136,9 +122,9 @@ public class GlobalConfig extends AbstractConfig {
         super.init("", "config.yml");
 
         if (getConfig().get("Prefix") == null)
-            getConfig().set("Prefix", "§8[§6MCPets§8] » ");
+            getConfig().set("Prefix", "§8[§6펫§8] » ");
         if (getConfig().get("DefaultName") == null)
-            getConfig().set("DefaultName", "§9Pet of %player%");
+            getConfig().set("DefaultName", "§9%player% 님의 펫");
         if (getConfig().get("OverrideDefaultName") == null)
             getConfig().set("OverrideDefaultName", true);
         if (getConfig().get("EnableClickBackToMenu") == null)
@@ -202,22 +188,11 @@ public class GlobalConfig extends AbstractConfig {
         if (getConfig().get("Taming.ColorLeft") == null)
             getConfig().set("Taming.ColorLeft", "§f");
 
-        if (getConfig().get("MySQL.Prefix") == null)
-            getConfig().set("MySQL.Prefix", "");
-        if (getConfig().get("MySQL.User") == null)
-            getConfig().set("MySQL.User", "user");
-        if (getConfig().get("MySQL.Password") == null)
-            getConfig().set("MySQL.Password", "password");
-        if (getConfig().get("MySQL.Host") == null)
-            getConfig().set("MySQL.Host", "localhost");
-        if (getConfig().get("MySQL.Port") == null)
-            getConfig().set("MySQL.Port", "2560");
-        if (getConfig().get("MySQL.Database") == null)
-            getConfig().set("MySQL.Database", "mcpets_db");
+        // 에고버스: DB 는 Kokonut-Core 공용 풀을 쓴다. 예전 MySQL 접속 설정은 지운다.
+        getConfig().set("MySQL", null);
+        getConfig().set("DisableMySQL", null);
         if (getConfig().get("BlackListedWorlds") == null)
             getConfig().set("BlackListedWorlds", new ArrayList<String>());
-        if (getConfig().get("DisableMySQL") == null)
-            getConfig().set("DisableMySQL", false);
         if  (getConfig().get("FastMount") == null)
             getConfig().set("FastMount", false);
         if  (getConfig().get("DisableFastMountWhileHoldingSignalStick") == null)
@@ -291,13 +266,6 @@ public class GlobalConfig extends AbstractConfig {
         tamingColorDone = getConfig().getString("Taming.ColorDone");
         tamingColorLeft = getConfig().getString("Taming.ColorLeft");
 
-        disableMySQL = getConfig().getBoolean("DisableMySQL");
-        MySQL_Prefix = getConfig().getString("MySQL.Prefix");
-        MySQL_USER = getConfig().getString("MySQL.User");
-        MySQL_PASSWORD = getConfig().getString("MySQL.Password");
-        MySQL_HOST = getConfig().getString("MySQL.Host");
-        MySQL_PORT = getConfig().getString("MySQL.Port");
-        MySQL_DB = getConfig().getString("MySQL.Database");
         blackListedWorlds = getConfig().getStringList("BlackListedWorlds");
 
         fastMount = getConfig().getBoolean("FastMount");
