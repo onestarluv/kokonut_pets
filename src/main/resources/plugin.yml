@@ -14,6 +14,7 @@ depend:
 softdepend:
   - ModelEngine
   - BetterModel
+  - Kokonut_Model
   - Nexo
   - WorldGuard
   - LuckPerms

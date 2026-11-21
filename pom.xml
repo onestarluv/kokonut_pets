@@ -20,7 +20,7 @@
     </licenses>
 
     <build>
-        <finalName>${project.name}-${project.version}</finalName>
+        <finalName>Kokonut_Pets-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -38,6 +38,28 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- 빌드한 JAR를 core/plugin 으로 수집 (-Ddeploy.dir=... 로 변경, 루트 작업 buildPets 가 지정) -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>collect-plugin-jar</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${deploy.dir}</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources><resource>
+                                <directory>${project.build.directory}</directory>
+                                <filtering>false</filtering>
+                                <includes><include>${project.build.finalName}.jar</include></includes>
+                            </resource></resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -47,6 +69,7 @@
         </resources>
     </build>
     <properties>
+        <deploy.dir>${project.basedir}/../plugin</deploy.dir>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -161,16 +184,19 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <!-- Kokonut_Model(BetterModel 포크) API를 로컬 빌드 산출물로 참조. 먼저 core에서 Kokonut_Model을 빌드할 것 -->
             <groupId>io.github.toxicity188</groupId>
             <artifactId>bettermodel-bukkit-api</artifactId>
-            <version>2.2.0</version>
-            <scope>provided</scope>
+            <version>3.7.0-kokonut</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../Kokonut_Model/api/bukkit-api/build/libs/bettermodel-bukkit-api-3.7.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>dev.lone</groupId>
-            <artifactId>api-itemsadder</artifactId>
-            <version>4.0.10</version>
-            <scope>provided</scope>
+            <groupId>io.github.toxicity188</groupId>
+            <artifactId>bettermodel-api</artifactId>
+            <version>3.7.0-kokonut</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../Kokonut_Model/api/build/libs/bettermodel-api-3.7.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nexomc</groupId>
