@@ -26,7 +26,7 @@ dependencies {
     compileOnly("net.luckperms:api:5.5")
 
     compileOnly(files(
-        providers.gradleProperty("mythicMobsJar").orElse("D:/egoverse/home1/plugins/MythicMobs-5.14.0 (1).jar"),
+        providers.gradleProperty("mythicMobsJar").orElse("D:/egoverse/home1/plugins/MythicMobsPremium-5.14.0.jar"),
         providers.gradleProperty("nexoJar").orElse("D:/egoverse/home1/plugins/nexo-1.29.1.jar"),
         providers.gradleProperty("worldEditJar").orElse("D:/egoverse/home1/plugins/FastAsyncWorldEdit-Paper-2.16.1.jar"),
     ))
